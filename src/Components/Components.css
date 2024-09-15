@@ -1,0 +1,3 @@
+.utilsStyle {
+    @apply sm:m-[5vh] mt-[5vh] mb-[5vh] text-nowrap text-[18px] sm:text-[20px] md:text-[25px] xl:text-[30px] font-normal;
+}
