@@ -1,4 +1,30 @@
+import axios from "axios";
+import { useEffect } from "react";
+
+const options = {
+  method: "GET",
+
+  headers: {
+    "x-rapidapi-key": "718976a7d5msh6c867fee2de9f14p136f58jsn816a979210a5",
+    "x-rapidapi-host": "exercisedb.p.rapidapi.com",
+  },
+};
+
 export const SearchExercies = () => {
+  useEffect(() => {
+    try {
+      axios
+        .request(
+          "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
+          options
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <>
       <section className=" mt-[3vh] sm:mt-[5vh] text-center">
