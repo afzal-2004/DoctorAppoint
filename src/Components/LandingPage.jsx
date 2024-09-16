@@ -1,6 +1,6 @@
 import { FaArrowRight } from "react-icons/fa";
 import "./Components.css";
-export const Home = () => {
+export const LandingPage = () => {
   return (
     <div className="text-center  w-full mt-[5vh]  flex flex-col justify-center items-center">
       <h1 className="text-center   text-[20px] sm:text-[25px] md:text-[30px] xl:text-[36px] font-bold">

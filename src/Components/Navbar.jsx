@@ -1,7 +1,7 @@
 export const Navbar = () => {
   return (
     <>
-      <header className=" flex items-center gap-10">
+      <header className=" flex items-center gap-10 cursor-pointer">
         <img
           src="/bodyFitlogo.avif"
           alt=""

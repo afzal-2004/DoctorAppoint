@@ -1,30 +1,11 @@
-import axios from "axios";
-import { useEffect } from "react";
-
-const options = {
-  method: "GET",
-
-  headers: {
-    "x-rapidapi-key": "718976a7d5msh6c867fee2de9f14p136f58jsn816a979210a5",
-    "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-  },
-};
-
+import { AppContext } from "../Context/Contextcreater";
+import { useContext } from "react";
 export const SearchExercies = () => {
-  useEffect(() => {
-    try {
-      axios
-        .request(
-          "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
-          options
-        )
-        .then((res) => {
-          console.log(res.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const { setsearch, search, setSearchingPart } = useContext(AppContext);
+  const Onhandlechange = () => {
+    setSearchingPart(search);
+  };
+
   return (
     <>
       <section className=" mt-[3vh] sm:mt-[5vh] text-center">
@@ -35,8 +16,15 @@ export const SearchExercies = () => {
           <input
             type="text"
             className="p-2 outline-none  border border-red-500 rounded-l-xl sm:w-[85%] w-[75%] text-[20px]"
+            onChange={(e) => {
+              e.preventDefault;
+              setsearch(e.target.value);
+            }}
           />
-          <button className="  sm:w-[15%] w-[25%] p-2 text-[20px] rounded-r-xl text-white">
+          <button
+            className="  sm:w-[15%] w-[25%] p-2 text-[20px] rounded-r-xl text-white"
+            onClick={Onhandlechange}
+          >
             Search
           </button>
         </div>
