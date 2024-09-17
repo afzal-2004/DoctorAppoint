@@ -16,6 +16,6 @@ body {
   font-weight: 600;
   font-style: normal;
   background-color: #FFFAFB;
-  padding: 10px;
 
+  @apply sm:ml-5 sm:mr-5 sm:p-[10px] p-[5px];
 }
