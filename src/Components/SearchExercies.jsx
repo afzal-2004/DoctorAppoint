@@ -4,6 +4,7 @@ export const SearchExercies = () => {
   const { setsearch, search, setSearchingPart } = useContext(AppContext);
   const Onhandlechange = () => {
     setSearchingPart(search);
+    setsearch("");
   };
 
   return (
@@ -15,6 +16,7 @@ export const SearchExercies = () => {
         <div className="  rounded-xl   max-w-[90vw] sm:w-[70vw] m-auto  sm:mt-[5vh] bg-red-400">
           <input
             type="text"
+            value={search}
             className="p-2 outline-none  border border-red-500 rounded-l-xl sm:w-[85%] w-[75%] text-[20px]"
             onChange={(e) => {
               e.preventDefault;

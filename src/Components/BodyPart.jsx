@@ -7,10 +7,11 @@ const options = {
   method: "GET",
 
   headers: {
-    "x-rapidapi-key": "718976a7d5msh6c867fee2de9f14p136f58jsn816a979210a5",
+    "x-rapidapi-key": "f6a302ee71msh2bf73cfb8a812e7p140c7fjsn95d3727117d4",
     "x-rapidapi-host": "exercisedb.p.rapidapi.com",
   },
 };
+
 export const BodyPart = () => {
   const [Bodyparts, setBodyparts] = useState([]);
 
