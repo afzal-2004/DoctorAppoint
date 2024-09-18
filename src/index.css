@@ -19,3 +19,13 @@ body {
 
   @apply sm:ml-5 sm:mr-5 sm:p-[10px] p-[5px];
 }
+
+.nav-item {
+  color: black;
+  text-decoration: none;
+}
+
+li a.active {
+  color: rgb(66, 66, 165);
+  font-weight: bold;
+}

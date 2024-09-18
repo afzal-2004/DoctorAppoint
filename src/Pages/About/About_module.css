@@ -1,0 +1,16 @@
+.utilityFooter {
+    @apply border border-slate-400 p-4 h-[150px] md:h-[200px] flex flex-col justify-center;
+}
+
+
+.mainHeading {
+    @apply uppercase font-medium text-center text-[25px] sm:text-[35px] mt-[3vh];
+}
+
+.fontClass {
+    font-weight: 600;
+}
+
+.mainContent {
+    @apply sm:flex justify-between items-center gap-4;
+}
