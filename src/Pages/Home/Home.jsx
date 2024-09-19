@@ -2,11 +2,19 @@ import Hedaderimage from "../../assets/frontend/header_img.png";
 import Footerimage from "../../assets/frontend/appointment_img.png";
 
 import { FaArrowRightLong } from "react-icons/fa6";
-import { specialityData, doctors } from "../../assets/frontend/assets";
+import { specialityData } from "../../assets/frontend/assets";
 import { Link } from "react-router-dom";
 import { DoctorCard } from "../../Components/DoctorCard";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 export const Home = () => {
+  const [Doctorsdata, setDoctorsdata] = useState([]);
+  useEffect(() => {
+    axios.get("/public/Doctor.json").then((res) => {
+      console.log(res.data);
+      setDoctorsdata(res.data);
+    });
+  }, []);
   return (
     <div>
       <main>
@@ -66,7 +74,7 @@ export const Home = () => {
             Simply browse through our extensive list of trusted doctors.
           </p>
           <main className="  gap-4 grid   grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 sm:gap-6   p-10   justify-center ">
-            {doctors.map((data, i) => (
+            {Doctorsdata.map((data, i) => (
               <div
                 key={i}
                 className={`flex flex-col  items-center rounded-lg  mt-3 border border-slate-200 ${
