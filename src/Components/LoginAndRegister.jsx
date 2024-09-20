@@ -23,7 +23,7 @@ export const Register = () => {
       autoClose: 2000,
     });
     setdata({ name: "", email: "", Mobilenumner: "", Password: "" });
-    setInterval(() => {
+    setTimeout(() => {
       navigate("/login");
     }, 1000);
   };
@@ -129,7 +129,8 @@ export const Login = () => {
       emailOrMobile: "",
       Password: "",
     });
-    setInterval(() => {
+
+    setTimeout(() => {
       navigate("/");
     }, 1000);
   };
