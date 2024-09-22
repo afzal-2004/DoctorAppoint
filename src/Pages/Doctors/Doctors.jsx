@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const Doctors = () => {
   const [Doctordata, setDoctordata] = useState([]);
   useEffect(() => {
-    axios.get("/public/Doctor.json").then((res) => {
+    axios.get("/Doctor.json").then((res) => {
       console.log(res.data);
       setDoctordata(res.data);
     });

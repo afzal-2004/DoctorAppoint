@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// import { useParams } from "react-router-dom";
+
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { FaCircleExclamation, FaArrowRight } from "react-icons/fa6";
-import { toast } from "react-toastify";
+
 import { DoctorCard } from "./DoctorCard";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
@@ -62,9 +62,6 @@ export const DoctorDetails = () => {
     setNextSevenBookingDate(nextSevenDays);
   }, []);
   //  Handling Booking Funtion
-  const handleBookingStatus = () => {
-    toast.success("Book Doctor");
-  };
 
   return (
     <>
@@ -145,16 +142,13 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                <button
-                  className=" m-[5vh] border bg-blue-500 rounded-3xl text-white p-4   sm:text-[18px] text-[15px] gap-3 flex  items-center"
-                  onClick={() => {
-                    handleBookingStatus();
-                  }}
-                >
-                  {" "}
-                  Book an appointment
-                  <FaArrowRight />
-                </button>
+                <Link to={"/patientDetails"}>
+                  <button className=" m-[5vh] border bg-blue-500 rounded-3xl text-white p-4   sm:text-[18px] text-[15px] gap-3 flex  items-center ">
+                    {" "}
+                    Book an appointment
+                    <FaArrowRight />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

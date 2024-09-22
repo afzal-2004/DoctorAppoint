@@ -8,6 +8,7 @@ import { Doctors } from "../Pages/Doctors/Doctors";
 import { Sidebar } from "../Components/Sidebar";
 import { Login, Register } from "../Components/LoginAndRegister";
 import { DoctorDetails } from "../Components/DoctorDetails";
+import { PatinentDetails } from "../Components/PatinentDetails";
 
 export const Index = () => {
   return (
@@ -21,6 +22,7 @@ export const Index = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/allDoctors/:id" element={<DoctorDetails />} />
+          <Route path="/patientDetails" element={<PatinentDetails />} />
           <Route path="/allDoctors" element={<DoctorOutlet />}>
             <Route path="/allDoctors" element={<Doctors />} />
           </Route>
