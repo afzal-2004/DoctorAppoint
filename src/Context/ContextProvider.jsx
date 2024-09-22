@@ -7,6 +7,12 @@ export const ContextProvider = ({ children }) => {
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState("");
   const [day, setday] = useState(null);
+  const [data, setdata] = useState({
+    emailOrMobile: "",
+    Password: "",
+  });
+  console.log(" My form login data is ", data);
+  console.log(Object.keys(data).every((value) => value === ""));
   const value = {
     Doctor,
     RelatedDoctor,
@@ -16,6 +22,8 @@ export const ContextProvider = ({ children }) => {
     setday,
     Time,
     setTime,
+    data,
+    setdata,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

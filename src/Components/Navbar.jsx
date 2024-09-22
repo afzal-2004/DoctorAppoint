@@ -1,11 +1,13 @@
 import logo from "../assets/frontend/logo.svg";
 import { CiMenuFries } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
 export const Navbar = () => {
   const [Opennav, setOpenNav] = useState(false);
 
+  const { data } = useContext(AppContext);
   const handleNav = () => {
     setOpenNav(!Opennav);
   };
@@ -49,11 +51,17 @@ export const Navbar = () => {
             <NavLink to={"/contact"}>Contact</NavLink>
           </li>
         </ul>
-        <button
-          className={`p-4 bg-blue-500  hidden  text-white  rounded-lg sm:relative    sm:flex `}
-        >
-          <Link to={"/register"}>Create Account</Link>
-        </button>
+
+        {Object.keys(data).length === 0 ? (
+          "User profile"
+        ) : (
+          <button
+            className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+          >
+            <Link to={"/register"}>Create Account</Link>
+          </button>
+        )}
+
         {/* Mobile  Menus */}
         {Opennav && (
           <div className=" sm:hidden flex absolute top-[60px]  flex-col  bg-slate-300  w-[50vw]  h-[300px] right-0   justify-between  ">

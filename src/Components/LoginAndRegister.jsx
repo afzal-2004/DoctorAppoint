@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
 export const Register = () => {
   const navigate = useNavigate();
   const [data, setdata] = useState({
@@ -11,6 +12,7 @@ export const Register = () => {
     Password: "",
   });
   const handelChange = (e) => {
+    e.preventDefault();
     setdata({
       ...data,
       [e.target.name]: e.target.value,
@@ -111,10 +113,8 @@ export const Register = () => {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const [data, setdata] = useState({
-    emailOrMobile: "",
-    Password: "",
-  });
+  const { data, setdata } = useContext(AppContext);
+
   const handleChange = (e) => {
     setdata({
       ...data,
@@ -123,12 +123,13 @@ export const Login = () => {
   };
   const handleData = (e) => {
     e.preventDefault();
+
     console.log(data);
     toast.success("login");
-    setdata({
-      emailOrMobile: "",
-      Password: "",
-    });
+    // setdata({
+    //   emailOrMobile: "",
+    //   Password: "",
+    // });
 
     setTimeout(() => {
       navigate("/");
