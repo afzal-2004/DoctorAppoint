@@ -10,7 +10,7 @@ import axios from "axios";
 export const Home = () => {
   const [Doctorsdata, setDoctorsdata] = useState([]);
   useEffect(() => {
-    axios.get("/public/Doctor.json").then((res) => {
+    axios.get("/Doctor.json").then((res) => {
       console.log(res.data);
       setDoctorsdata(res.data);
     });
