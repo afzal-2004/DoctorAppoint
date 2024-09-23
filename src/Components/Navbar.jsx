@@ -3,8 +3,11 @@ import { CiMenuFries } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { useContext, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { UserProfile } from "./UserProfile";
 import { AppContext } from "../Context/AppContext";
+
 export const Navbar = () => {
+  const { Login } = useContext(AppContext);
   const [Opennav, setOpenNav] = useState(false);
 
   const { data } = useContext(AppContext);
@@ -52,14 +55,22 @@ export const Navbar = () => {
           </li>
         </ul>
 
-        {Object.keys(data).length === 0 ? (
-          "User profile"
-        ) : (
-          <button
-            className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+        {Object.keys(data.emailOrMobile).length > 0 &&
+        Object.keys(data.Password).length > 0 &&
+        Login ? (
+          <div
+            className={`  hidden  text-white  rounded-[30px] sm:relative    sm:flex `}
           >
-            <Link to={"/register"}>Create Account</Link>
-          </button>
+            <UserProfile />
+          </div>
+        ) : (
+          <Link to={"/register"}>
+            <button
+              className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+            >
+              Create Account
+            </button>
+          </Link>
         )}
 
         {/* Mobile  Menus */}

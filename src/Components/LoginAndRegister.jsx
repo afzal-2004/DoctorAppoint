@@ -1,30 +1,26 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 export const Register = () => {
   const navigate = useNavigate();
-  const [data, setdata] = useState({
-    name: "",
-    email: "",
-    Mobilenumner: "",
-    Password: "",
-  });
+
+  const { Registerdata, setRegisterdata } = useContext(AppContext);
   const handelChange = (e) => {
     e.preventDefault();
-    setdata({
-      ...data,
+    setRegisterdata({
+      ...Registerdata,
       [e.target.name]: e.target.value,
     });
   };
   const handleData = (e) => {
     e.preventDefault();
-    console.log(data);
+    console.log(Registerdata);
     toast.success("Register SuccesFully", {
       autoClose: 2000,
     });
-    setdata({ name: "", email: "", Mobilenumner: "", Password: "" });
+
     setTimeout(() => {
       navigate("/login");
     }, 1000);
@@ -45,7 +41,7 @@ export const Register = () => {
           <input
             type="text"
             name="name"
-            value={data.name}
+            value={Registerdata.name}
             onChange={handelChange}
             className="w-full px-3 py-2 border rounded-md"
             required
@@ -59,7 +55,7 @@ export const Register = () => {
           <input
             type="email"
             name="email"
-            value={data.email}
+            value={Registerdata.email}
             onChange={handelChange}
             className="w-full px-3 py-2 border rounded-md"
             required
@@ -73,7 +69,7 @@ export const Register = () => {
           <input
             type="text"
             name="Mobilenumner"
-            value={data.Mobilenumner}
+            value={Registerdata.Mobilenumner}
             onChange={handelChange}
             className="w-full px-3 py-2 border rounded-md"
             required
@@ -86,7 +82,7 @@ export const Register = () => {
           </label>
           <input
             type="password"
-            value={data.Password}
+            value={Registerdata.Password}
             name="Password"
             onChange={handelChange}
             className="w-full px-3 py-2 border rounded-md"
@@ -113,7 +109,7 @@ export const Register = () => {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { data, setdata } = useContext(AppContext);
+  const { data, setdata, setLogin } = useContext(AppContext);
 
   const handleChange = (e) => {
     setdata({
@@ -126,10 +122,6 @@ export const Login = () => {
 
     console.log(data);
     toast.success("login");
-    // setdata({
-    //   emailOrMobile: "",
-    //   Password: "",
-    // });
 
     setTimeout(() => {
       navigate("/");
@@ -175,6 +167,7 @@ export const Login = () => {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+          onClick={() => setLogin(true)}
         >
           Login
         </button>
