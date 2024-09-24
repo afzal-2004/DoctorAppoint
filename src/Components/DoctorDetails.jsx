@@ -31,7 +31,7 @@ export const DoctorDetails = () => {
     axios.get("/Doctor.json").then((res) => {
       const Doctordata = res.data;
       const DoctorDetail = Doctordata?.find((doc) => doc._id === id);
-      // console.log("Speciality of the doctor  is ", DoctorDetail.speciality);
+
       const Specility = DoctorDetail.speciality;
       const filterd = Doctordata.filter(
         (item) =>

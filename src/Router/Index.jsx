@@ -39,7 +39,7 @@ export const Index = () => {
 
 const DoctorOutlet = () => {
   return (
-    <div className="flex  gap-4   border border-red-500">
+    <div className="flex  gap-4  ">
       <Sidebar />
       <Outlet />
     </div>

@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Profile_pic from "../assets/frontend/profile_pic.png";
+import upload_area from "../assets/frontend/upload_area.png";
+import { CiEdit } from "react-icons/ci";
 import { AppContext } from "../Context/AppContext";
 export const UserProfile = () => {
   const { Registerdata } = useContext(AppContext);
@@ -65,9 +67,59 @@ export const UserProfile = () => {
   );
 };
 export const MyProfile = () => {
+  const { Registerdata } = useContext(AppContext);
+
   return (
     <>
-      <h1>My profile Section</h1>
+      <section>
+        <div className="flex gap-4">
+          {/* <img src={Profile_pic} alt="" /> */}
+          <img src={upload_area} alt="" />
+        </div>
+        <h1 className="sm:text-[25px] font-semibold text-[20px]  m-4">
+          {Registerdata.name}
+        </h1>
+        <hr className=" bg-black" />
+        <div className="    sm:w-[50%] xl:w-[30%] m-3">
+          <span className=" uppercase underline  font-semibold">
+            contact Information
+          </span>
+          <p className="  flex justify-between  m-3">
+            <span>Emailid :</span>
+            <span>{Registerdata.email}</span>
+          </p>
+          <p className="  flex justify-between m-3">
+            <span>Phone:</span>
+            <span>{Registerdata.Mobilenumner}</span>
+          </p>
+          <p className="  flex justify-between m-3">
+            <span>Address :</span>
+            <span>{Registerdata.Address}</span>
+          </p>
+        </div>
+        <div className="    sm:w-[50%] xl:w-[30%]">
+          <h3 className=" uppercase underline font-semibold">
+            basic information
+          </h3>
+          <p className="  flex justify-between m-3">
+            <span>Gender :</span>
+            <span>{Registerdata.Gender}</span>
+          </p>
+          <p className="  flex justify-between m-3">
+            <span>Birthday :</span>
+            <span>{Registerdata.DOB}</span>
+          </p>
+        </div>
+        <div className=" gap-10  flex m-4">
+          <button className="  border border-slate-500 py-2 px-4 rounded-2xl flex  gap-3">
+            <CiEdit /> Edit{" "}
+          </button>
+          <button className="  border border-slate-500 py-2 px-4 rounded-2xl">
+            {" "}
+            Save information
+          </button>
+        </div>
+      </section>
     </>
   );
 };
