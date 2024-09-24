@@ -8,26 +8,33 @@ export const ContextProvider = ({ children }) => {
   const [Time, setTime] = useState("");
   const [day, setday] = useState(null);
   const [Login, setLogin] = useState(true);
-  const [data, setdata] = useState({
-    emailOrMobile: "moa44468@gmail.com",
-    Password: "12345678",
-  });
+  const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
+
   const [Doctorcategory, setDoctorcategory] = useState("All");
-  console.log("Category Of The Particulear doctor", Doctorcategory);
+  const [data, setdata] = useState({
+    emailOrMobile: "",
+    Password: "",
+  });
+  const [Registerdata, setRegisterdata] = useState({
+    name: "",
+    email: "",
+    Mobilenumner: "",
+    Password: "",
+    profilePicture: "",
+    Address: "",
+    Gender: "",
+    DOB: "",
+  });
+
   useEffect(() => {
     setDoctorcategory("All");
   }, []);
-
-  const [Registerdata, setRegisterdata] = useState({
-    name: "Afzal",
-    email: "moa44468@gmail.com",
-    Mobilenumner: "1234567890",
-    Password: "",
-    profilePicture: "",
-    Address: "123456777",
-    Gender: "male",
-    DOB: "10/17/003",
-  });
+  const addDoctorAppointment = (doctorId) => {
+    setAppointmentsDoctorsid((prevAppointments) => [
+      ...prevAppointments,
+      doctorId,
+    ]);
+  };
 
   const value = {
     Doctor,
@@ -46,6 +53,9 @@ export const ContextProvider = ({ children }) => {
     setLogin,
     Doctorcategory,
     setDoctorcategory,
+    AppointmentsDoctorsid,
+    setAppointmentsDoctorsid,
+    addDoctorAppointment,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

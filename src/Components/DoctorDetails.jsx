@@ -26,7 +26,7 @@ export const DoctorDetails = () => {
   const date = new Date();
 
   const Day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  //   Filtering data is based on you id
+
   useEffect(() => {
     axios.get("/Doctor.json").then((res) => {
       const Doctordata = res.data;
@@ -38,14 +38,13 @@ export const DoctorDetails = () => {
           item.speciality.toLowerCase().includes(Specility.toLowerCase()) &&
           item._id !== id
       );
-      // console.log(filterd);
 
       setRelatedDoctor(filterd);
 
       setDoctor(DoctorDetail);
     });
   }, [id]);
-  // For Simple    to  Show next Seven days for Booking Doctor
+
   useEffect(() => {
     const nextSevenDays = [];
 
@@ -142,7 +141,7 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                <Link to={"/patientDetails"}>
+                <Link to={`/patientDetails/${id}`}>
                   <button className=" m-[5vh] border bg-blue-500 rounded-3xl text-white p-4   sm:text-[18px] text-[15px] gap-3 flex  items-center ">
                     {" "}
                     Book an appointment

@@ -1,22 +1,37 @@
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import { AppContext } from "../Context/AppContext";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 export const PatinentDetails = () => {
+  const { addDoctorAppointment } = useContext(AppContext);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    gender: "",
-    contact: "",
-    address: "",
-    symptoms: "",
+    name: "Afzal",
+    age: "14",
+    gender: "male",
+    contact: "123456789",
+    address: "Addd",
+    symptoms: "feve",
     doctor: "",
   });
 
   const handleChange = (e) => {
+    e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addDoctorAppointment(id);
+    toast.success("Doctor Metting Appointed ", {
+      autoClose: 2000,
+    });
+    setTimeout(() => {
+      navigate("/Appointments");
+    }, 1000);
 
     console.log("Patient Data:", formData);
   };
