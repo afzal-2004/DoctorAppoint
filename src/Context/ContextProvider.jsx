@@ -12,18 +12,18 @@ export const ContextProvider = ({ children }) => {
 
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [data, setdata] = useState({
-    emailOrMobile: "",
-    Password: "",
+    emailOrMobile: "moa44468@gmail",
+    Password: "1234567",
   });
   const [Registerdata, setRegisterdata] = useState({
-    name: "",
-    email: "",
-    Mobilenumner: "",
-    Password: "",
-    profilePicture: "",
-    Address: "",
-    Gender: "",
-    DOB: "",
+    name: "Afzal",
+    email: "moa44468@gmail.com",
+    Mobilenumner: "9520752384",
+    Password: "1234567",
+    profilePicture: "khan",
+    Address: " Street 1   xyzvillage  xyz city xyz State , India",
+    Gender: "Male",
+    DOB: "03/07/2005",
   });
 
   useEffect(() => {

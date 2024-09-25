@@ -1,13 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Profile_pic from "../assets/frontend/profile_pic.png";
 import upload_area from "../assets/frontend/upload_area.png";
 import { CiEdit } from "react-icons/ci";
+import { EditForm } from "./EditForm";
 import { AppContext } from "../Context/AppContext";
 export const UserProfile = () => {
   const { Registerdata } = useContext(AppContext);
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
+  console.log("Profie logic is ", OpenProfilenav);
   const handelProfileNav = () => {
     setOpenProfilenav(!OpenProfilenav);
   };
@@ -67,14 +70,20 @@ export const UserProfile = () => {
   );
 };
 export const MyProfile = () => {
-  const { Registerdata } = useContext(AppContext);
-
+  // eslint-disable-next-line no-unused-vars
+  const { Registerdata, setRegisterdata } = useContext(AppContext);
+  const [openForm, setopenForm] = useState(false);
   return (
     <>
-      <section>
+      <section className=" relative">
         <div className="flex gap-4">
-          {/* <img src={Profile_pic} alt="" /> */}
-          <img src={upload_area} alt="" />
+          {Registerdata.profilePicture ? (
+            <img src={Profile_pic} alt="" className="w-[150px]  rounded-md" />
+          ) : (
+            <p className="w-[150px]  h-[150px] rounded-full bg-yellow-400 text-black  flex  justify-center items-center text-[20px]">
+              <img src={upload_area} alt="" />
+            </p>
+          )}
         </div>
         <h1 className="sm:text-[25px] font-semibold text-[20px]  m-4">
           {Registerdata.name}
@@ -111,14 +120,16 @@ export const MyProfile = () => {
           </p>
         </div>
         <div className=" gap-10  flex m-4">
-          <button className="  border border-slate-500 py-2 px-4 rounded-2xl flex  gap-3">
+          <button
+            className="  border border-slate-500 py-2 px-4 rounded-2xl flex  gap-3"
+            onClick={() => {
+              setopenForm(!openForm);
+            }}
+          >
             <CiEdit /> Edit{" "}
           </button>
-          <button className="  border border-slate-500 py-2 px-4 rounded-2xl">
-            {" "}
-            Save information
-          </button>
         </div>
+        {openForm && <EditForm setopenForm={setopenForm} />}
       </section>
     </>
   );
