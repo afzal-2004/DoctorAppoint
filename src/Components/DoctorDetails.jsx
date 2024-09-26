@@ -2,8 +2,8 @@
 
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { FaCircleExclamation, FaArrowRight } from "react-icons/fa6";
-
+import { FaArrowRight } from "react-icons/fa6";
+import { FaCircleExclamation } from "react-icons/fa6";
 import { DoctorCard } from "./DoctorCard";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
@@ -60,7 +60,6 @@ export const DoctorDetails = () => {
 
     setNextSevenBookingDate(nextSevenDays);
   }, []);
-  //  Handling Booking Funtion
 
   return (
     <>
@@ -95,6 +94,7 @@ export const DoctorDetails = () => {
                 Doctor Fees :<span>{Doctor.fees}$</span>
               </p>
             </div>
+
             <div className="mt-[5vh]">
               <h1 className="font-semibold">Booking Slots</h1>
               <div className="flex  flex-wrap gap-4 md:gap-7  mt-5  m-5">

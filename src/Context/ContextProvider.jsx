@@ -7,27 +7,27 @@ export const ContextProvider = ({ children }) => {
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState("");
   const [day, setday] = useState(null);
-  const [Login, setLogin] = useState(true);
-  const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
+  const [Login, setLogin] = useState(false);
+  const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([""]);
 
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [data, setdata] = useState({
-    emailOrMobile: "moa44468@gmail",
-    Password: "1234567",
+    emailOrMobile: "",
+    Password: "",
   });
   const [Registerdata, setRegisterdata] = useState({
-    name: "Afzal",
-    email: "moa44468@gmail.com",
-    Mobilenumner: "9520752384",
-    Password: "1234567",
-    profilePicture: "khan",
-    Address: " Street 1   xyzvillage  xyz city xyz State , India",
-    Gender: "Male",
-    DOB: "03/07/2005",
+    name: "",
+    email: "",
+    Mobilenumner: "",
+    Password: "",
+    profilePicture: "",
+    Address: "",
+    Gender: "",
+    DOB: "",
   });
 
   useEffect(() => {
-    setDoctorcategory("All");
+    setDoctorcategory("");
   }, []);
   const addDoctorAppointment = (doctorId) => {
     setAppointmentsDoctorsid((prevAppointments) => [

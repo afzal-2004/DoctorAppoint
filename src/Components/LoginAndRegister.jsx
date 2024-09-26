@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
+import "./Components.css";
 export const Register = () => {
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ export const Register = () => {
             name="name"
             value={Registerdata.name}
             onChange={handelChange}
-            className="w-full px-3 py-2 border rounded-md"
+            className="loginForminput"
             required
           />
         </div>
@@ -57,7 +58,7 @@ export const Register = () => {
             name="email"
             value={Registerdata.email}
             onChange={handelChange}
-            className="w-full px-3 py-2 border rounded-md"
+            className="loginForminput"
             required
           />
         </div>
@@ -71,7 +72,7 @@ export const Register = () => {
             name="Mobilenumner"
             value={Registerdata.Mobilenumner}
             onChange={handelChange}
-            className="w-full px-3 py-2 border rounded-md"
+            className="loginForminput"
             required
           />
         </div>
@@ -85,15 +86,12 @@ export const Register = () => {
             value={Registerdata.Password}
             name="Password"
             onChange={handelChange}
-            className="w-full px-3 py-2 border rounded-md"
+            className="loginForminput"
             required
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
-        >
+        <button type="submit" className="RegisterandLoginBtn">
           Register
         </button>
         <Link to="/login">
@@ -145,7 +143,7 @@ export const Login = () => {
             value={data.emailOrMobile}
             name="emailOrMobile"
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-md"
+            className="loginForminput"
             required
           />
         </div>
@@ -158,7 +156,7 @@ export const Login = () => {
             type="password"
             name="Password"
             value={data.Password}
-            className="w-full px-3 py-2 border rounded-md"
+            className="loginForminput"
             onChange={handleChange}
             required
           />
@@ -166,7 +164,7 @@ export const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+          className="RegisterandLoginBtn"
           onClick={() => setLogin(true)}
         >
           Login

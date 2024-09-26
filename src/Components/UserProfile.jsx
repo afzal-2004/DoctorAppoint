@@ -7,20 +7,21 @@ import upload_area from "../assets/frontend/upload_area.png";
 import { CiEdit } from "react-icons/ci";
 import { EditForm } from "./EditForm";
 import { AppContext } from "../Context/AppContext";
+import { FaChevronLeft } from "react-icons/fa";
 export const UserProfile = () => {
   const { Registerdata } = useContext(AppContext);
-  const [OpenProfilenav, setOpenProfilenav] = useState(false);
+  const [OpenProfilenav, setOpenProfilenav] = useState(true);
   console.log("Profie logic is ", OpenProfilenav);
   const handelProfileNav = () => {
     setOpenProfilenav(!OpenProfilenav);
   };
   return (
     <>
-      <div className=" flex items-center gap-1 ">
+      <div className=" sm:flex items-center gap-1 hidden ">
         {Registerdata.profilePicture ? (
           <img src={Profile_pic} alt="" className="w-[50px] rounded-full" />
         ) : (
-          <p className="w-[50px]  h-[50px] rounded-full bg-yellow-400 text-black  flex  justify-center items-center text-[20px]">
+          <p className="w-[50px]  h-[50px] rounded-full bg-yellow-400 text-black  sm:flex  justify-center items-center text-[20px]  ">
             {Registerdata.name[0]}
           </p>
         )}
@@ -29,46 +30,49 @@ export const UserProfile = () => {
           onClick={handelProfileNav}
         />
       </div>
-      {OpenProfilenav ? (
-        <div
-          className=" absolute text-black top-[50px]
-         sm:top-[70px]  right-[0px] min-w-[200px]"
-        >
-          <ul className="p-2  bg-slate-200 text-[17px] rounded-lg">
-            <Link to={"/userProfile"}>
-              <li
-                className="p-1 hover:text-blue-500"
-                onClick={handelProfileNav}
-              >
-                My Profile
-              </li>
-            </Link>
-
-            <Link to={"/Appointments"}>
-              <li
-                className="p-1  hover:text-blue-500"
-                onClick={handelProfileNav}
-              >
-                My Appointments
-              </li>
-            </Link>
-
-            <Link>
-              <li
-                className="p-1  hover:text-blue-500"
-                onClick={handelProfileNav}
-              >
-                Logout
-              </li>
-            </Link>
-          </ul>
-        </div>
-      ) : (
-        ""
-      )}
+      <div className="  flex sm:hidden text-[20px] justify-evenly items-center text-black ">
+        <FaChevronLeft
+          className=" text-black text-[20px] font-semibold"
+          onClick={handelProfileNav}
+        />
+        Account
+      </div>
+      {OpenProfilenav && <ProfileSidebar handelProfileNav={handelProfileNav} />}
     </>
   );
 };
+const ProfileSidebar = ({ handelProfileNav }) => {
+  return (
+    <>
+      <div
+        className=" absolute text-black 
+        top-[40vh] right-[43vw]
+         sm:top-[70px]  sm:right-[0px] min-w-[200px]"
+      >
+        <ul className="p-2  bg-slate-200 text-[17px] rounded-lg">
+          <Link to={"/userProfile"}>
+            <li className="p-1 hover:text-blue-500" onClick={handelProfileNav}>
+              My Profile
+            </li>
+          </Link>
+
+          <Link to={"/Appointments"}>
+            <li className="p-1  hover:text-blue-500" onClick={handelProfileNav}>
+              My Appointments
+            </li>
+          </Link>
+
+          <Link>
+            <li className="p-1  hover:text-blue-500" onClick={handelProfileNav}>
+              Logout
+            </li>
+          </Link>
+        </ul>
+      </div>
+    </>
+  );
+};
+
 export const MyProfile = () => {
   // eslint-disable-next-line no-unused-vars
   const { Registerdata, setRegisterdata } = useContext(AppContext);

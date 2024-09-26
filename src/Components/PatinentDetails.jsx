@@ -3,18 +3,19 @@ import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import "./Components.css";
 export const PatinentDetails = () => {
   const { addDoctorAppointment } = useContext(AppContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: "Afzal",
-    age: "14",
-    gender: "male",
-    contact: "123456789",
-    address: "Addd",
-    symptoms: "feve",
+    name: "",
+    age: "",
+    gender: "",
+    contact: "",
+    address: "",
+    symptoms: "",
     doctor: "",
   });
 
@@ -49,7 +50,7 @@ export const PatinentDetails = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="Patientdetailsforminput"
             placeholder="Enter full name"
             required
           />
@@ -62,7 +63,7 @@ export const PatinentDetails = () => {
             name="age"
             value={formData.age}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="Patientdetailsforminput"
             placeholder="Enter age"
             required
           />
@@ -76,7 +77,7 @@ export const PatinentDetails = () => {
             name="gender"
             value={formData.gender}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="Patientdetailsforminput"
             required
           >
             <option value="">Select gender</option>
@@ -95,7 +96,7 @@ export const PatinentDetails = () => {
             name="contact"
             value={formData.contact}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="Patientdetailsforminput"
             placeholder="Enter contact number"
             required
           />
@@ -109,7 +110,7 @@ export const PatinentDetails = () => {
             name="address"
             value={formData.address}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="Patientdetailsforminput"
             placeholder="Enter address"
             required
           />
@@ -123,16 +124,13 @@ export const PatinentDetails = () => {
             name="symptoms"
             value={formData.symptoms}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="Patientdetailsforminput"
             placeholder="Describe symptoms"
             required
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
+        <button type="submit" className="RegisterandLoginBtn">
           Submit
         </button>
       </form>

@@ -55,23 +55,25 @@ export const Navbar = () => {
           </li>
         </ul>
 
-        {Object.keys(data.emailOrMobile).length > 0 &&
-        Object.keys(data.Password).length > 0 &&
-        Login ? (
-          <div
-            className={`  hidden  text-white  rounded-[30px] sm:relative    sm:flex `}
-          >
-            <UserProfile />
-          </div>
-        ) : (
-          <Link to={"/register"}>
-            <button
-              className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+        <div className=" hidden sm:flex">
+          {Object.keys(data.emailOrMobile).length > 0 &&
+          Object.keys(data.Password).length > 0 &&
+          Login ? (
+            <div
+              className={`  hidden  text-white  rounded-[30px] sm:relative    sm:flex `}
             >
-              Create Account
-            </button>
-          </Link>
-        )}
+              <UserProfile />
+            </div>
+          ) : (
+            <Link to={"/register"}>
+              <button
+                className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+              >
+                Create Account
+              </button>
+            </Link>
+          )}
+        </div>
 
         {/* Mobile  Menus */}
         {Opennav && (
@@ -90,12 +92,25 @@ export const Navbar = () => {
                 <NavLink to={"/Contact"}>Contact</NavLink>
               </li>
             </ul>
-            <button
-              className={`p-4 bg-blue-500    text-white     `}
-              onClick={handleNav}
-            >
-              <Link to={"/register"}>Create Account</Link>
-            </button>
+            <div className="  sm:flex">
+              {Object.keys(data.emailOrMobile).length > 0 &&
+              Object.keys(data.Password).length > 0 &&
+              Login ? (
+                <div
+                  className={`    text-white  rounded-[30px] sm:relative     `}
+                >
+                  <UserProfile />
+                </div>
+              ) : (
+                <Link to={"/register"}>
+                  <button
+                    className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+                  >
+                    Create Account
+                  </button>
+                </Link>
+              )}
+            </div>
           </div>
         )}
       </nav>
