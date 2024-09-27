@@ -9,7 +9,7 @@ export const ContextProvider = ({ children }) => {
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(null);
   const [day, setday] = useState(null);
-  const [Login, setLogin] = useState(true);
+  const [Login, setLogin] = useState(false);
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
 
   const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
