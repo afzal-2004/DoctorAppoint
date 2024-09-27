@@ -1,14 +1,13 @@
 import logo from "../assets/frontend/logo.svg";
 import { CiMenuFries } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { UserProfile } from "./UserProfile";
 import { AppContext } from "../Context/AppContext";
 
 export const Navbar = () => {
-  const { Login } = useContext(AppContext);
-  const [Opennav, setOpenNav] = useState(false);
+  const { Login, setOpenNav, Opennav } = useContext(AppContext);
 
   const { data } = useContext(AppContext);
   const handleNav = () => {
@@ -104,7 +103,10 @@ export const Navbar = () => {
               ) : (
                 <Link to={"/register"}>
                   <button
-                    className={`p-4 bg-blue-500  hidden  text-white  rounded-[30px] sm:relative    sm:flex hover:bg-blue-400 `}
+                    className={`p-4 bg-blue-500   w-full text-white  sm:relative    sm:flex hover:bg-blue-400 `}
+                    onClick={() => {
+                      setOpenNav(false);
+                    }}
                   >
                     Create Account
                   </button>

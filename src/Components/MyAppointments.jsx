@@ -3,12 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const MyAppointments = () => {
-  const {
-    AppointmentsDoctorsid,
-    day,
-
-    Time,
-  } = useContext(AppContext);
+  const { AppointmentsDoctorsid, NextSevenBookingDate, Time, day } =
+    useContext(AppContext);
   console.log(AppointmentsDoctorsid);
   const [AppointedDoc, setAppointedDoc] = useState([]);
   console.log("Appointed Doctor data is : ", AppointedDoc);
@@ -43,7 +39,7 @@ export const MyAppointments = () => {
                 <span className=" text-[17px] font-light">
                   {doctor.speciality}
                 </span>
-                <p className=" text-[15px]">Address</p>
+                <p className=" text-[15px] font-bold">Address :</p>
                 <p className=" text-[18px font-semibold]">
                   <span>{doctor.address?.line1}</span>
                   <span>{doctor.address?.line2}</span>
@@ -51,7 +47,8 @@ export const MyAppointments = () => {
 
                 <p>Date & Time</p>
                 <span>
-                  25 July {day} | 8:30 {Time}
+                  {`${NextSevenBookingDate[day]?.dayName} ${NextSevenBookingDate[day]?.dayDate}`}{" "}
+                  | {doctor.apointmentTime[Time]}
                 </span>
               </div>
               <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">

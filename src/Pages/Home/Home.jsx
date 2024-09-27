@@ -11,7 +11,6 @@ export const Home = () => {
   const [Doctorsdata, setDoctorsdata] = useState([]);
   useEffect(() => {
     axios.get("/Doctor.json").then((res) => {
-      console.log(res.data);
       setDoctorsdata(res.data);
     });
   }, []);

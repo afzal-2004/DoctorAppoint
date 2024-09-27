@@ -9,10 +9,11 @@ import { EditForm } from "./EditForm";
 import { AppContext } from "../Context/AppContext";
 import { FaChevronLeft } from "react-icons/fa";
 export const UserProfile = () => {
-  const { Registerdata } = useContext(AppContext);
-  const [OpenProfilenav, setOpenProfilenav] = useState(true);
+  const { Registerdata, setOpenNav } = useContext(AppContext);
+
+  const [OpenProfilenav, setOpenProfilenav] = useState(false);
   console.log("Profie logic is ", OpenProfilenav);
-  const handelProfileNav = () => {
+  const handelProfileNav = (OpenProfilenav) => {
     setOpenProfilenav(!OpenProfilenav);
   };
   return (
@@ -30,10 +31,18 @@ export const UserProfile = () => {
           onClick={handelProfileNav}
         />
       </div>
-      <div className="  flex sm:hidden text-[20px] justify-evenly items-center text-black ">
+
+      <div
+        className="  flex sm:hidden text-[20px] justify-evenly items-center text-black "
+        onClick={() => {
+          handelProfileNav(OpenProfilenav);
+        }}
+      >
         <FaChevronLeft
           className=" text-black text-[20px] font-semibold"
-          onClick={handelProfileNav}
+          onClick={() => {
+            setOpenNav(false);
+          }}
         />
         Account
       </div>

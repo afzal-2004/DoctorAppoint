@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaCircleExclamation } from "react-icons/fa6";
 import { DoctorCard } from "./DoctorCard";
@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
 export const DoctorDetails = () => {
-  const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
-
   const {
     Doctor,
     setDoctor,
@@ -20,6 +18,8 @@ export const DoctorDetails = () => {
     setday,
     Time,
     setTime,
+    NextSevenBookingDate,
+    setNextSevenBookingDate,
   } = useContext(AppContext);
 
   const { id } = useParams();
@@ -40,7 +40,6 @@ export const DoctorDetails = () => {
       );
 
       setRelatedDoctor(filterd);
-
       setDoctor(DoctorDetail);
     });
   }, [id]);

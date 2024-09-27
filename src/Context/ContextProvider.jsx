@@ -3,27 +3,31 @@ import { AppContext } from "./AppContext";
 import { useState, useEffect } from "react";
 
 export const ContextProvider = ({ children }) => {
+  const [Opennav, setOpenNav] = useState(true);
+
   const [Doctor, setDoctor] = useState([]);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
-  const [Time, setTime] = useState("");
-  const [day, setday] = useState(null);
-  const [Login, setLogin] = useState(false);
-  const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([""]);
+  const [Time, setTime] = useState("2");
+  const [day, setday] = useState("4");
+  const [Login, setLogin] = useState(true);
+  const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
+
+  const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
 
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [data, setdata] = useState({
-    emailOrMobile: "",
-    Password: "",
+    emailOrMobile: "moa4468@gmail.com",
+    Password: "12345678",
   });
   const [Registerdata, setRegisterdata] = useState({
-    name: "",
-    email: "",
-    Mobilenumner: "",
-    Password: "",
+    name: "Afzal",
+    email: "Khan",
+    Mobilenumner: "900",
+    Password: "123",
     profilePicture: "",
-    Address: "",
-    Gender: "",
-    DOB: "",
+    Address: "gdgd",
+    Gender: "male",
+    DOB: "10.1100",
   });
 
   useEffect(() => {
@@ -37,6 +41,8 @@ export const ContextProvider = ({ children }) => {
   };
 
   const value = {
+    Opennav,
+    setOpenNav,
     Doctor,
     RelatedDoctor,
     setRelatedDoctor,
@@ -56,6 +62,8 @@ export const ContextProvider = ({ children }) => {
     AppointmentsDoctorsid,
     setAppointmentsDoctorsid,
     addDoctorAppointment,
+    NextSevenBookingDate,
+    setNextSevenBookingDate,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

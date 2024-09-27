@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "./Components.css";
 export const PatinentDetails = () => {
-  const { addDoctorAppointment } = useContext(AppContext);
+  const { addDoctorAppointment, Login } = useContext(AppContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -25,14 +25,20 @@ export const PatinentDetails = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    addDoctorAppointment(id);
-    toast.success("Doctor Metting Appointed ", {
-      autoClose: 2000,
-    });
-    setTimeout(() => {
-      navigate("/Appointments");
-    }, 1000);
+    if (Login) {
+      e.preventDefault();
+      addDoctorAppointment(id);
+      toast.success("Doctor Metting Appointed ", {
+        autoClose: 2000,
+      });
+      setTimeout(() => {
+        navigate("/Appointments");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    }
 
     console.log("Patient Data:", formData);
   };
