@@ -1,5 +1,5 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { Home } from "../pages/Home/Home";
+import { Home } from "../Pages/Home/Home";
 import { Navbar } from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { About } from "../Pages/About/About";
