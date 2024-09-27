@@ -76,7 +76,7 @@ export const Navbar = () => {
 
         {/* Mobile  Menus */}
         {Opennav && (
-          <div className=" sm:hidden flex absolute top-[60px]  flex-col  bg-slate-300  w-[50vw]  h-[300px] right-0   justify-between  ">
+          <div className=" sm:hidden flex absolute top-[60px]  flex-col  bg-slate-300  w-[50vw]  h-[300px] right-0   justify-between z-50  ">
             <ul className={`uppercase gap-y-5 p-4 `}>
               <li className="p-2" onClick={handleNav}>
                 <NavLink to={"/"}>Home</NavLink>

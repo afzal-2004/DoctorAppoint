@@ -12,7 +12,7 @@ export const UserProfile = () => {
   const { Registerdata, setOpenNav } = useContext(AppContext);
 
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
-  console.log("Profie logic is ", OpenProfilenav);
+
   const handelProfileNav = (OpenProfilenav) => {
     setOpenProfilenav(!OpenProfilenav);
   };
@@ -28,7 +28,9 @@ export const UserProfile = () => {
         )}
         <IoIosArrowDown
           className=" text-black text-[20px] font-semibold"
-          onClick={handelProfileNav}
+          onClick={() => {
+            handelProfileNav(OpenProfilenav);
+          }}
         />
       </div>
 
@@ -51,14 +53,18 @@ export const UserProfile = () => {
   );
 };
 const ProfileSidebar = ({ handelProfileNav }) => {
+  const { setOpenNav } = useContext(AppContext);
   return (
     <>
       <div
         className=" absolute text-black 
-        top-[40vh] right-[43vw]
+        top-[40vh] right-[43vw]  z-50
          sm:top-[70px]  sm:right-[0px] min-w-[200px]"
       >
-        <ul className="p-2  bg-slate-200 text-[17px] rounded-lg">
+        <ul
+          className="p-2  bg-slate-200 text-[17px] rounded-lg"
+          onClick={() => setOpenNav(false)}
+        >
           <Link to={"/userProfile"}>
             <li className="p-1 hover:text-blue-500" onClick={handelProfileNav}>
               My Profile
