@@ -8,6 +8,7 @@ import { DoctorCard } from "./DoctorCard";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
+
 export const DoctorDetails = () => {
   const {
     Doctor,
@@ -20,6 +21,7 @@ export const DoctorDetails = () => {
     setTime,
     NextSevenBookingDate,
     setNextSevenBookingDate,
+    Login,
   } = useContext(AppContext);
 
   const { id } = useParams();
@@ -140,13 +142,24 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                <Link to={`/patientDetails/${id}`}>
-                  <button className=" m-[5vh] border bg-blue-500 rounded-3xl text-white p-4   sm:text-[18px] text-[15px] gap-3 flex  items-center ">
-                    {" "}
+                {!Login ? (
+                  <button
+                    disabled={!Login}
+                    className={`m-[5vh] border ${
+                      !Login ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
+                    } rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center`}
+                  >
                     Book an appointment
                     <FaArrowRight />
                   </button>
-                </Link>
+                ) : (
+                  <Link to={`/patientDetails/${id}`}>
+                    <button className="m-[5vh] border bg-blue-500 rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center">
+                      Book an appointment
+                      <FaArrowRight />
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
