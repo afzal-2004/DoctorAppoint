@@ -4,17 +4,15 @@ import { useState, useEffect } from "react";
 
 export const ContextProvider = ({ children }) => {
   const [Opennav, setOpenNav] = useState(false);
-
   const [Doctor, setDoctor] = useState([]);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(null);
   const [day, setday] = useState(null);
   const [Login, setLogin] = useState(false);
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
-
   const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
+  const [Doctorcategory, setDoctorcategory] = useState("");
 
-  const [Doctorcategory, setDoctorcategory] = useState("All");
   const [data, setdata] = useState({
     emailOrMobile: "",
     Password: "",

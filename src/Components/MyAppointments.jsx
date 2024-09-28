@@ -50,6 +50,8 @@ export const MyAppointments = () => {
                   {`${NextSevenBookingDate[day]?.dayName} ${NextSevenBookingDate[day]?.dayDate}`}{" "}
                   | {doctor.apointmentTime[Time]}
                 </span>
+                <p>Fees</p>
+                <span>{doctor.fees}$</span>
               </div>
               <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
                 <button className=" border border-slate-500 px-3 py-2 w-[150px]">

@@ -3,16 +3,19 @@ import { AppContext } from "../Context/AppContext";
 
 export const Sidebar = () => {
   const { Doctorcategory, setDoctorcategory } = useContext(AppContext);
+
   return (
     <>
-      <div className=" hidden sm:flex  md:m-[2vh] xl:m-[5vh]  cursor-pointer ">
+      <div
+        className={`   hidden sm:flex  md:m-[2vh] xl:m-[5vh]  cursor-pointer`}
+      >
         <ul className="  min-w-[200px] gap-3 rounded-md">
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "All" && "bg-blue-500 text-slate-100"
+              Doctorcategory === "" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("All");
+              setDoctorcategory("");
             }}
           >
             All Doctor

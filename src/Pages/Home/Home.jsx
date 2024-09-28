@@ -34,11 +34,13 @@ export const Home = () => {
                 doctors, schedule your appointment hassle-free.
               </p>
             </div>
-            <button className="bg-white rounded-3xl p-3 flex gap-3 justify-between  items-center mt-[5vh]">
-              {" "}
-              Book Appointment
-              <FaArrowRightLong />
-            </button>
+            <Link to="/allDoctors">
+              <button className="bg-white rounded-3xl p-3 flex gap-3 justify-between  items-center mt-[5vh]">
+                {" "}
+                Book Appointment
+                <FaArrowRightLong />
+              </button>
+            </Link>
           </div>
           <div>
             <img
@@ -95,10 +97,12 @@ export const Home = () => {
                 <h1 className="text-[35px] sm:text-[45px] font-semibold text-center  sm:p-[20px] p-[10px] ">
                   Book Appointment <br /> With 100+ Trusted Doctors
                 </h1>
-                <button className=" bg-white p-2 rounded-3xl flex items-center gap-3">
-                  Create account
-                  <FaArrowRightLong />
-                </button>
+                <Link to="/register">
+                  <button className=" bg-white p-2 rounded-3xl flex items-center gap-3">
+                    Create account
+                    <FaArrowRightLong />
+                  </button>
+                </Link>
               </div>
               <div>
                 <img

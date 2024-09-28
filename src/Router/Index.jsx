@@ -41,6 +41,7 @@ const DoctorOutlet = () => {
   return (
     <div className="flex  gap-4  ">
       <Sidebar />
+
       <Outlet />
     </div>
   );
