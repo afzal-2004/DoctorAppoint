@@ -15,7 +15,7 @@ export const ContextProvider = ({ children }) => {
 
   const [data, setdata] = useState({
     emailOrMobile: "",
-    Password: "",
+    Password: "1",
   });
   const [Registerdata, setRegisterdata] = useState({
     name: "",

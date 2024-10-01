@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -21,7 +22,7 @@ export const MyAppointments = () => {
 
   return (
     <>
-      <div className=" mt-[8vh]">
+      <div className={` mt-[8vh]  ${Cancel && " relative "}`}>
         <h1 className=" text-[25px] font-bold text-center">My appointments </h1>
         {AppointedDoc.map((doctor, i) => (
           <div key={i} className="   sm:flex">
@@ -58,7 +59,7 @@ export const MyAppointments = () => {
                   <button
                     className=" border border-slate-500 px-3 py-2 w-[150px]"
                     onClick={() => {
-                      setCancel(false);
+                      setCancel(!Cancel);
                     }}
                   >
                     Cancel
@@ -72,17 +73,28 @@ export const MyAppointments = () => {
           </div>
         ))}
       </div>
-      <div>{Cancel && <CancelPopup />}</div>
+
+      {Cancel && <CancelPopup setCancel={setCancel} />}
     </>
   );
 };
-const CancelPopup = () => {
+
+const CancelPopup = ({ setCancel }) => {
   return (
     <>
-      <div className=" bg-white  w-full  m-auto  sm:w-[300px] p-2">
+      <div className=" bg-white  w-full  m-auto  sm:w-[300px]  absolute  top-[20%]  right-[40%] p-4 rounded-lg z-50 flex flex-col justify-center">
         <h1>Are you Sure !! Cancel Appointment</h1>
-        <button className=" bg-red-400 px-3 py-2">Yes</button>
-        <button className=" bg-green-400 px-3 py-2">Cancel </button>
+        <div>
+          <button className=" bg-red-400 px-3 py-1 rounded-md m-4">Yes</button>
+          <button
+            className=" bg-green-400 px-3 py-1 rounded-md"
+            onClick={() => {
+              setCancel(false);
+            }}
+          >
+            Cancel{" "}
+          </button>
+        </div>
       </div>
     </>
   );
