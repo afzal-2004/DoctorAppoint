@@ -4,7 +4,11 @@ import { GoDotFill } from "react-icons/go";
 export const DoctorCard = ({ data }) => {
   return (
     <div>
-      <img src={data.image} alt="" className=" bg-blue-50 rounded-lg  " />
+      <img
+        src={data.image}
+        alt=""
+        className=" bg-blue-50  hover:bg-blue-500 rounded-lg  "
+      />
 
       <div className=" flex flex-col p-3">
         <p className="flex items-center text-green-300 ">
