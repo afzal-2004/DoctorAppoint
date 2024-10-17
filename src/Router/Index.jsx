@@ -11,12 +11,14 @@ import { DoctorDetails } from "../Components/DoctorDetails";
 import { PatinentDetails } from "../Components/PatinentDetails";
 import { MyProfile } from "../Components/UserProfile";
 import { MyAppointments } from "../Components/MyAppointments";
+import { AdminRoute } from "../Admin/Home/AdminRoute";
 
 export const Index = () => {
+  const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        {!isAdminRoute && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -30,8 +32,9 @@ export const Index = () => {
           <Route path="/allDoctors" element={<DoctorOutlet />}>
             <Route path="/allDoctors" element={<Doctors />} />
           </Route>
+          <Route path="/admin" element={<AdminRoute />} />
         </Routes>
-        <Footer />
+        {!isAdminRoute && <Footer />}
       </BrowserRouter>
     </>
   );
