@@ -1,5 +1,3 @@
-import logo from "../assets/frontend/logo.svg";
-
 export const Footer = () => {
   return (
     <footer className=" mt-[5vh] ">
@@ -8,7 +6,11 @@ export const Footer = () => {
           <div className=" md:max-w-[50%]">
             <div className="mb-6 md:mb-0">
               <a href="/" className="flex items-center">
-                <img src={logo} className="h-8 me-3" alt="FlowBite Logo" />
+                <img
+                  src="/frontend/logo.svg"
+                  className="h-8 me-3"
+                  alt="FlowBite Logo"
+                />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap  text-gray-300">
                   Name
                 </span>

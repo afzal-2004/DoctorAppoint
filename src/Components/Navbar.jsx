@@ -1,4 +1,3 @@
-import logo from "../assets/frontend/logo.svg";
 import { CiMenuFries } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { useContext } from "react";
@@ -18,7 +17,7 @@ export const Navbar = () => {
       <nav className="   flex  justify-between items-center p-2 h-[50px] sm:h-[70px]  ">
         <Link to="/">
           <h1 className="flex  gap-3  items-center ">
-            <img src={logo} alt="" />
+            <img src="frontend/logo.svg" alt="" />
             <p className="text-[20px]   xl:text-[25px] font-bold">CareBridge</p>
           </h1>
         </Link>

@@ -11,31 +11,51 @@ import { DoctorDetails } from "../Components/DoctorDetails";
 import { PatinentDetails } from "../Components/PatinentDetails";
 import { MyProfile } from "../Components/UserProfile";
 import { MyAppointments } from "../Components/MyAppointments";
-import { AdminRoute } from "../Admin/Home/AdminRoute";
-
+/* ALL ADMIN PABEL REALTED ROITES IS DEFINED HERE*/
+import { AdminNavbar } from "../Admin/Components/Sidebar";
+import { AdminAuth } from "../Admin/Components/AdminAuth";
+import { Admin } from "../Admin/Home/Admin";
+import { AdminSidebar } from "../Admin/Components/Sidebar";
+import { AddDoctor } from "../Admin/Components/AddDoctor";
+import { DoctorList } from "../Admin/Components/DoctorList";
 export const Index = () => {
-  const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <>
       <BrowserRouter>
-        {!isAdminRoute && <Navbar />}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/allDoctors/:id" element={<DoctorDetails />} />
-          <Route path="/patientDetails/:id" element={<PatinentDetails />} />
-          <Route path="/userProfile" element={<MyProfile />} />
-          <Route path="/Appointments" element={<MyAppointments />} />
-          <Route path="/allDoctors" element={<DoctorOutlet />}>
-            <Route path="/allDoctors" element={<Doctors />} />
+          {/* This Route For My Main App */}
+          <Route path="/" element={<MainAppLayoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/allDoctors/:id" element={<DoctorDetails />} />
+            <Route path="/patientDetails/:id" element={<PatinentDetails />} />
+            <Route path="/userProfile" element={<MyProfile />} />
+            <Route path="/Appointments" element={<MyAppointments />} />
+            <Route path="/allDoctors" element={<DoctorOutlet />}>
+              <Route path="/allDoctors" element={<Doctors />} />
+            </Route>
           </Route>
-          <Route path="/admin" element={<AdminRoute />} />
+          {/* / ADMIN PANEL ROUTES   */}
+          <Route path="/admin" element={<AdminAuth />} />
+          <Route path="/adminLayout" element={<AdminLayout />}>
+            <Route path="/adminLayout" element={<Admin />} />
+            <Route path="/adminLayout/adddoctor" element={<AddDoctor />} />
+            <Route path="/adminLayout/allDoctorList" element={<DoctorList />} />
+          </Route>
         </Routes>
-        {!isAdminRoute && <Footer />}
       </BrowserRouter>
+    </>
+  );
+};
+const MainAppLayoute = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
   );
 };
@@ -47,5 +67,19 @@ const DoctorOutlet = () => {
 
       <Outlet />
     </div>
+  );
+};
+
+export const AdminLayout = () => {
+  return (
+    <>
+      <AdminNavbar />
+      <div className="flex  border-black border border-r-0 border-l-0 border-b-0 border-t-2  ">
+        <AdminSidebar />
+        <div className="bg-blue-50  m-auto  p-4 w-[90%]   sm:min-w-[80%] md:min-w-[85%]">
+          <Outlet />
+        </div>
+      </div>
+    </>
   );
 };
