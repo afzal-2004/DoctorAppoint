@@ -14,10 +14,11 @@ import { MyAppointments } from "../Components/MyAppointments";
 /* ALL ADMIN PABEL REALTED ROITES IS DEFINED HERE*/
 import { AdminNavbar } from "../Admin/Components/Sidebar";
 import { AdminAuth } from "../Admin/Components/AdminAuth";
-import { Admin } from "../Admin/Home/Admin";
+
 import { AdminSidebar } from "../Admin/Components/Sidebar";
 import { AddDoctor } from "../Admin/Components/AddDoctor";
 import { DoctorList } from "../Admin/Components/DoctorList";
+import { AdminHome } from "../Admin/Components/AdminHome";
 export const Index = () => {
   return (
     <>
@@ -41,7 +42,7 @@ export const Index = () => {
           {/* / ADMIN PANEL ROUTES   */}
           <Route path="/admin" element={<AdminAuth />} />
           <Route path="/adminLayout" element={<AdminLayout />}>
-            <Route path="/adminLayout" element={<Admin />} />
+            <Route path="/adminLayout" element={<AdminHome />} />
             <Route path="/adminLayout/adddoctor" element={<AddDoctor />} />
             <Route path="/adminLayout/allDoctorList" element={<DoctorList />} />
           </Route>
@@ -76,7 +77,11 @@ export const AdminLayout = () => {
       <AdminNavbar />
       <div className="flex  border-black border border-r-0 border-l-0 border-b-0 border-t-2  ">
         <AdminSidebar />
-        <div className="bg-blue-50  m-auto  p-4 w-[90%]   sm:min-w-[80%] md:min-w-[85%]">
+        <div
+          className="bg-blue-50  m-auto  p-4 w-[100%]   
+        sm:min-w-[80%] md:min-w-[80%]  h-[98vh]   
+   "
+        >
           <Outlet />
         </div>
       </div>

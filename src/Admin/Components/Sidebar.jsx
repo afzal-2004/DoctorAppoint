@@ -1,13 +1,23 @@
 import { Link } from "react-router-dom";
 import { FaHome, FaAddressBook } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export const AdminSidebar = () => {
-  const [navItem, setnavItem] = useState("1");
+  const [navItem, setnavItem] = useState(
+    localStorage.getItem("navItem") || "1"
+  );
+
+  useEffect(() => {
+    // Save navItem to localStorage whenever it changes
+    localStorage.setItem("navItem", navItem);
+  }, [navItem]);
 
   return (
-    <div className="   h-[98vh] m-auto  border-black border border-r-2 border-l-0 border-b-0 border-t-0   p-4 w-[30%]   sm:min-w-[20%] md:min-w-[15%]  cursor-pointer  hidden sm:block">
-      <ul className="flex flex-col gap-y-3 ">
+    <div
+      className="   h-[98vh] m-auto  border-black border border-r-2 border-l-0 border-b-0 border-t-0   p-1 w-[30%]  
+     sm:min-w-[20%] md:min-w-[20%]  cursor-pointer  hidden sm:block"
+    >
+      <ul className="flex flex-col gap-y-3  text-nowrap">
         <Link to={"/adminLayout"}>
           <li
             className={`flex items-center  gap-x-5 p-2 w-full  sm:text-[20px] flex-nowrap ${
