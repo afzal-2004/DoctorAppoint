@@ -1,16 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaHome, FaAddressBook } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 export const AdminSidebar = () => {
-  const [navItem, setnavItem] = useState(
-    localStorage.getItem("navItem") || "1"
-  );
-
-  useEffect(() => {
-    // Save navItem to localStorage whenever it changes
-    localStorage.setItem("navItem", navItem);
-  }, [navItem]);
+  const [navItem, setnavItem] = useState("1");
 
   return (
     <div

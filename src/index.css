@@ -18,7 +18,7 @@ body {
 
   background-color: #FFFAFB;
 
-  @apply sm:ml-5 sm:mr-5 sm:p-[10px] p-[5px];
+  @apply sm:ml-5 sm:mr-5 sm:p-[10px] p-[2px];
 }
 
 .nav-item {

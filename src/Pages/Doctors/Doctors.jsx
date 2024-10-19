@@ -27,7 +27,7 @@ export const Doctors = () => {
   }, [Doctorcategory]);
   return (
     <>
-      <main className="  gap-4 grid   grid-cols-2 md:grid-cols-3  sm:gap-6   p-10   justify-center">
+      <main className="  gap-4 grid   grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 sm:gap-6   p-10   justify-center">
         {Doctordata.map((data, i) => (
           <div
             key={i}

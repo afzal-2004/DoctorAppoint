@@ -7,7 +7,7 @@ export const Sidebar = () => {
   return (
     <>
       <div
-        className={`   hidden sm:flex  md:m-[2vh] xl:m-[5vh]  cursor-pointer`}
+        className={`   hidden lg:flex  md:m-[2vh] xl:m-[5vh]  cursor-pointer`}
       >
         <ul className="  min-w-[200px] gap-3 rounded-md">
           <li

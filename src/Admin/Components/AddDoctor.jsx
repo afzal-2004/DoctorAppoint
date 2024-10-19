@@ -7,7 +7,7 @@ export const AddDoctor = () => {
       <div className=" sm:w-[90%] w-[100%] m-auto">
         <h1 className=" font-semibold">Add Doctor</h1>
         <form action="" className=" bg-white p-3 mt-3">
-          <main className=" flex gap-x-5 items-center">
+          <main className=" flex gap-x-5 items-center justify-center">
             <div className=" w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] relative">
               <div className=" sm:w-[150px] w-[100px] h-[100px]  sm:h-[150px] absolute bg-slate-300  rounded-full flex justify-center items-center">
                 <CgProfile className=" sm:w-[70px]  sm:h-[70px] w-[50px] h-[50px]" />
