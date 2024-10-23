@@ -3,11 +3,12 @@ import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Profile_pic from "../assets/frontend/profile_pic.png";
-import upload_area from "../assets/frontend/upload_area.png";
+
 import { CiEdit } from "react-icons/ci";
-import { EditForm } from "./EditForm";
+
 import { AppContext } from "../Context/AppContext";
 import { FaChevronLeft } from "react-icons/fa";
+import "./Components.css";
 export const UserProfile = () => {
   const { Registerdata, setOpenNav } = useContext(AppContext);
 
@@ -87,69 +88,79 @@ const ProfileSidebar = ({ handelProfileNav }) => {
     </>
   );
 };
-
 export const MyProfile = () => {
-  // eslint-disable-next-line no-unused-vars
-  const { Registerdata, setRegisterdata } = useContext(AppContext);
-  const [openForm, setopenForm] = useState(false);
+  const [Edit, setEdit] = useState(false);
+  const { Registerdata } = useContext(AppContext);
+  const Profiledata = [
+    {
+      title: "Name",
+      property: Registerdata.name,
+    },
+    {
+      title: "Email",
+      property: Registerdata.email,
+    },
+    {
+      title: "Contact",
+      property: Registerdata.Mobilenumner,
+    },
+    {
+      title: "Address",
+      property: Registerdata.Address,
+    },
+    {
+      title: "DOB",
+      property: Registerdata.DOB,
+    },
+    {
+      title: "Gender",
+      property: Registerdata.Gender,
+    },
+  ];
+  const HandleEdit = () => {
+    setEdit(!Edit);
+  };
   return (
     <>
-      <section className=" relative">
-        <div className="flex gap-4">
-          {Registerdata.profilePicture ? (
-            <img src={Profile_pic} alt="" className="w-[150px]  rounded-md" />
-          ) : (
-            <p className="w-[150px]  h-[150px] rounded-full bg-yellow-400 text-black  flex  justify-center items-center text-[20px]">
-              <img src={upload_area} alt="" />
-            </p>
-          )}
-        </div>
-        <h1 className="sm:text-[25px] font-semibold text-[20px]  m-4">
-          {Registerdata.name}
+      <main className="bg-slate-500 p-5">
+        {Registerdata.name.length > 0 && (
+          <div className=" uppercase text-white   bg-yellow-300 w-[50px] h-[50px]  flex justify-center items-center p-2 rounded-full ">
+            <p>{Registerdata.name[0]}</p>
+          </div>
+        )}
+
+        <h1 className=" text-white text-center text-[28px] font-semibold">
+          User Profile
         </h1>
-        <hr className=" bg-black" />
-        <div className="    sm:w-[50%] xl:w-[30%] m-3">
-          <span className=" uppercase underline  font-semibold">
-            contact Information
-          </span>
-          <p className="  flex justify-between  m-3">
-            <span>Emailid :</span>
-            <span>{Registerdata.email}</span>
-          </p>
-          <p className="  flex justify-between m-3">
-            <span>Phone:</span>
-            <span>{Registerdata.Mobilenumner}</span>
-          </p>
-          <p className="  flex justify-between m-3">
-            <span>Address :</span>
-            <span>{Registerdata.Address}</span>
-          </p>
-        </div>
-        <div className="    sm:w-[50%] xl:w-[30%]">
-          <h3 className=" uppercase underline font-semibold">
-            basic information
-          </h3>
-          <p className="  flex justify-between m-3">
-            <span>Gender :</span>
-            <span>{Registerdata.Gender}</span>
-          </p>
-          <p className="  flex justify-between m-3">
-            <span>Birthday :</span>
-            <span>{Registerdata.DOB}</span>
-          </p>
-        </div>
-        <div className=" gap-10  flex m-4">
-          <button
-            className="  border border-slate-500 py-2 px-4 rounded-2xl flex  gap-3"
-            onClick={() => {
-              setopenForm(!openForm);
-            }}
-          >
-            <CiEdit /> Edit{" "}
-          </button>
-        </div>
-        {openForm && <EditForm setopenForm={setopenForm} />}
-      </section>
+        <section className=" p-3   shadow-lg  w-full sm:w-[90%] m-auto  sm:rounded-md text-white">
+          <div className=" p-4">
+            {Profiledata.map((data, i) => (
+              <ul
+                key={i}
+                className="  text-[16px] sm:text-[18px]  profiledetails items-center"
+              >
+                {" "}
+                <li className="col-span-1 m-2">{data.title} </li>
+                <input
+                  type="text"
+                  className=" col-span-3 sm:m-2 ml-auto  outline-none bg-slate-500 p-1 "
+                  value={data.property}
+                  readOnly={Edit ? true : false}
+                />
+                <li
+                  className="col-span-1  flex  justify-end "
+                  onClick={HandleEdit}
+                >
+                  <CiEdit />
+                </li>
+              </ul>
+            ))}
+          </div>
+        </section>
+        <button className="  bg-red-400 py-2 px-3 rounded-md mt-[3vh]">
+          Save
+        </button>
+      </main>
     </>
   );
 };
