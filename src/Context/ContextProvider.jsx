@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export const ContextProvider = ({ children }) => {
   const [Opennav, setOpenNav] = useState(false);
   const [Doctor, setDoctor] = useState([]);
-  console.log("All Doctor", Doctor);
+  console.log("This is My Doctor", Doctor);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(null);
   const [day, setday] = useState(null);

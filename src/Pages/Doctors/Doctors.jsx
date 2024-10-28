@@ -3,15 +3,18 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import { Backend_Url } from "../../../public/contstant";
 export const Doctors = () => {
   const [Doctordata, setDoctordata] = useState([]);
+  console.log("My Doctor list ", Doctordata);
 
   const { Doctorcategory } = useContext(AppContext);
 
   useEffect(() => {
     if (Doctorcategory === "All") {
-      axios.get("/Doctor.json").then((res) => {
+      axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
         setDoctordata(res.data);
+        console.log("This is My Doctor", res.data);
       });
     } else {
       axios.get("/Doctor.json").then((res) => {

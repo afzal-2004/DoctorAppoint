@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import "./Components.css";
+import axios from "axios";
+import { Backend_Url } from "../../public/contstant";
 export const Register = () => {
   const navigate = useNavigate();
 
@@ -16,15 +18,25 @@ export const Register = () => {
     });
   };
   const handleData = (e) => {
+    console.log(e);
     e.preventDefault();
-    console.log(Registerdata);
-    toast.success("Register SuccesFully", {
-      autoClose: 2000,
-    });
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 1000);
+    axios
+      .post(`${Backend_Url}/Register`, { Registerdata })
+      .then(() => {
+        toast.success("Register SuccessFully", {
+          autoClose: 2000,
+        });
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("Something Went Wrong ");
+      });
+
+    console.log(Registerdata);
   };
 
   return (
