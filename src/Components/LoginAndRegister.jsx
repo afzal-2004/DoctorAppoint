@@ -22,7 +22,7 @@ export const Register = () => {
     e.preventDefault();
 
     axios
-      .post(`${Backend_Url}/Register`, { Registerdata })
+      .post(`${Backend_Url}/Register`, Registerdata)
       .then(() => {
         toast.success("Register SuccessFully", {
           autoClose: 2000,
