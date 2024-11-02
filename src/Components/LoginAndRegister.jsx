@@ -127,15 +127,22 @@ export const Login = () => {
       [e.target.name]: [e.target.value],
     });
   };
-  const handleData = (e) => {
-    e.preventDefault();
-    handleChange;
-    console.log(data);
-    toast.success("login");
+  const handleData = () => {
+    axios
+      .post(`${Backend_Url}`, data)
+      .then((e) => {
+        console.log(e);
+        handleChange;
+        console.log(data);
+        toast.success("login");
 
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
