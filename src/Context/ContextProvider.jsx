@@ -1,11 +1,15 @@
 /* eslint-disable react/prop-types */
 import { AppContext } from "./AppContext";
 import { useState, useEffect } from "react";
-
+import axios from "axios";
+import { Backend_Url } from "../../public/contstant";
+import Cookies from "js-cookie";
 export const ContextProvider = ({ children }) => {
+  const Token = Cookies.get("token");
+
   const [Opennav, setOpenNav] = useState(false);
   const [Doctor, setDoctor] = useState([]);
-  console.log("This is My Doctor", Doctor);
+
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(null);
   const [day, setday] = useState(null);
@@ -13,21 +17,27 @@ export const ContextProvider = ({ children }) => {
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
   const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
   const [Doctorcategory, setDoctorcategory] = useState("");
+  const [Profile, setProfile] = useState([]);
+  console.log(" Prifile data ", Profile);
 
   const [data, setdata] = useState({
-    emailOrMobile: "",
-    Password: "",
+    emailOrMobile: "moa44468@gmail.com",
+    Password: "123456",
   });
-  const [Registerdata, setRegisterdata] = useState({
-    name: "",
-    email: "",
-    Mobilenumner: "",
-    Password: "",
-    profilePicture: "",
-    Address: "",
-    Gender: "",
-    DOB: "",
-  });
+
+  const ProfileData = () => {
+    console.log("This is Profile data ", Profile);
+    axios
+      .get(`${Backend_Url}/Userprofile`, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((e) => console.log(e));
+  };
 
   useEffect(() => {
     setDoctorcategory("");
@@ -52,8 +62,8 @@ export const ContextProvider = ({ children }) => {
     setTime,
     data,
     setdata,
-    Registerdata,
-    setRegisterdata,
+    Profile,
+    setProfile,
     Login,
     setLogin,
     Doctorcategory,
@@ -63,6 +73,7 @@ export const ContextProvider = ({ children }) => {
     addDoctorAppointment,
     NextSevenBookingDate,
     setNextSevenBookingDate,
+    ProfileData,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

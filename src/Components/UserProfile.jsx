@@ -3,14 +3,13 @@ import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Profile_pic from "../assets/frontend/profile_pic.png";
-
 import { CiEdit } from "react-icons/ci";
-
 import { AppContext } from "../Context/AppContext";
 import { FaChevronLeft } from "react-icons/fa";
 import "./Components.css";
+
 export const UserProfile = () => {
-  const { Registerdata, setOpenNav } = useContext(AppContext);
+  const { Profile, setOpenNav } = useContext(AppContext);
 
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
 
@@ -20,11 +19,11 @@ export const UserProfile = () => {
   return (
     <>
       <div className=" sm:flex items-center gap-1 hidden ">
-        {Registerdata.profilePicture ? (
+        {Profile.profilePicture ? (
           <img src={Profile_pic} alt="" className="w-[50px] rounded-full" />
         ) : (
           <p className="w-[50px]  h-[50px] rounded-full bg-yellow-400 text-black  sm:flex  justify-center items-center text-[20px]  ">
-            {Registerdata.name[0]}
+            {/* {Profile.name[0]} */}
           </p>
         )}
         <IoIosArrowDown

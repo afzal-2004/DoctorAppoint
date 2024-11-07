@@ -1,15 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import "./Components.css";
 import axios from "axios";
-import { Backend_Url } from "../../public/contstant";
+import Cookies from "js-cookie";
+import { Backend_Url } from "../../public/contstant.js";
 export const Register = () => {
   const navigate = useNavigate();
-
-  const { Registerdata, setRegisterdata } = useContext(AppContext);
+  const [Registerdata, setRegisterdata] = useState({
+    name: "",
+    email: "",
+    Mobilenumner: "",
+    Password: "",
+    profilePicture: "",
+    Address: "",
+    Gender: "",
+    DOB: "",
+  });
   const handelChange = (e) => {
     e.preventDefault();
     setRegisterdata({
@@ -119,7 +128,7 @@ export const Register = () => {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { data, setdata, setLogin } = useContext(AppContext);
+  const { data, setdata, setLogin, ProfileData } = useContext(AppContext);
 
   const handleChange = (e) => {
     setdata({
@@ -127,14 +136,18 @@ export const Login = () => {
       [e.target.name]: [e.target.value],
     });
   };
-  const handleData = () => {
+  const handleData = (e) => {
+    e.preventDefault();
     axios
-      .post(`${Backend_Url}`, data)
+      .post(`${Backend_Url}/Login`, data)
       .then((e) => {
-        console.log(e);
         handleChange;
-        console.log(data);
-        toast.success("login");
+        ProfileData;
+        const Token = e.data.token;
+
+        Cookies.set("token", Token, { expires: 1 });
+
+        toast.success(`${e.data?.message}`);
 
         setTimeout(() => {
           navigate("/");
