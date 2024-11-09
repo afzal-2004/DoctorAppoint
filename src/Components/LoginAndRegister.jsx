@@ -128,7 +128,7 @@ export const Register = () => {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { data, setdata, setLogin, ProfileData } = useContext(AppContext);
+  const { data, setdata, setLogin, setProfile } = useContext(AppContext);
 
   const handleChange = (e) => {
     setdata({
@@ -142,13 +142,13 @@ export const Login = () => {
       .post(`${Backend_Url}/Login`, data)
       .then((e) => {
         handleChange;
-        ProfileData;
+
         const Token = e.data.token;
 
         Cookies.set("token", Token, { expires: 1 });
-
+        console.log(e);
         toast.success(`${e.data?.message}`);
-
+        setProfile(e.data.finduser);
         setTimeout(() => {
           navigate("/");
         }, 1000);
