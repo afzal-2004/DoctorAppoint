@@ -8,14 +8,15 @@ export const PatinentDetails = () => {
   const { addDoctorAppointment, Login } = useContext(AppContext);
   const { id } = useParams();
   const navigate = useNavigate();
+  console.log(id);
 
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
+    name: "Afzal",
+    age: "20",
     gender: "",
-    contact: "",
-    address: "",
-    symptoms: "",
+    contact: "+0000000000",
+    address: "moa545445",
+    symptoms: "Synuss",
     doctor: "",
   });
 

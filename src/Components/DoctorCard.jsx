@@ -5,7 +5,7 @@ export const DoctorCard = ({ data }) => {
   return (
     <div>
       <img
-        src={data.image}
+        src={data.avtar}
         alt=""
         className=" bg-blue-50  hover:bg-blue-500 rounded-lg  "
       />

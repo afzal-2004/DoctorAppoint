@@ -6,7 +6,6 @@ import { AppContext } from "../../Context/AppContext";
 import { Backend_Url } from "../../../public/contstant";
 export const Doctors = () => {
   const [Doctordata, setDoctordata] = useState([]);
-  console.log("My Doctor list ", Doctordata);
 
   const { Doctorcategory } = useContext(AppContext);
 
@@ -17,7 +16,7 @@ export const Doctors = () => {
         console.log("This is My Doctor", res.data);
       });
     } else {
-      axios.get("/Doctor.json").then((res) => {
+      axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
         const Doctors = res.data;
 
         const filterd = Doctors.filter((item) =>

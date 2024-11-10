@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import { DoctorCard } from "../../Components/DoctorCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Backend_Url } from "../../../public/contstant";
 export const Home = () => {
   const [Doctorsdata, setDoctorsdata] = useState([]);
   useEffect(() => {
-    axios.get("/Doctor.json").then((res) => {
+    axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
       setDoctorsdata(res.data);
     });
   }, []);

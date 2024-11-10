@@ -8,7 +8,7 @@ import { DoctorCard } from "./DoctorCard";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
-
+import { Backend_Url } from "../../public/contstant";
 export const DoctorDetails = () => {
   const {
     Doctor,
@@ -21,7 +21,7 @@ export const DoctorDetails = () => {
     setTime,
     NextSevenBookingDate,
     setNextSevenBookingDate,
-    Login,
+    token,
   } = useContext(AppContext);
 
   const { id } = useParams();
@@ -30,7 +30,7 @@ export const DoctorDetails = () => {
   const Day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   useEffect(() => {
-    axios.get("/Doctor.json").then((res) => {
+    axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
       const Doctordata = res.data;
       const DoctorDetail = Doctordata?.find((doc) => doc._id === id);
 
@@ -68,7 +68,7 @@ export const DoctorDetails = () => {
         <main className="md:flex gap-10  p-4  ">
           <div className=" ">
             <img
-              src={`${Doctor.image}`}
+              src={`${Doctor.avtar}`}
               alt="Doctorimage"
               className="w-full    object-cover  bg-blue-500 sm:min-w-[300px]   rounded-xl p-0  "
             />
@@ -142,11 +142,11 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                {!Login ? (
+                {!token ? (
                   <button
-                    disabled={!Login}
+                    disabled={!token}
                     className={`m-[5vh] border ${
-                      !Login ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
+                      !token ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
                     } rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center`}
                   >
                     Book an appointment

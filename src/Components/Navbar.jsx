@@ -6,7 +6,7 @@ import { UserProfile } from "./UserProfile";
 import { AppContext } from "../Context/AppContext";
 
 export const Navbar = () => {
-  const { Login, setOpenNav, Opennav } = useContext(AppContext);
+  const { token, setOpenNav, Opennav } = useContext(AppContext);
 
   const { data } = useContext(AppContext);
   const handleNav = () => {
@@ -56,7 +56,7 @@ export const Navbar = () => {
         <div className=" hidden sm:flex">
           {Object.keys(data.emailOrMobile).length > 0 &&
           Object.keys(data.Password).length > 0 &&
-          Login ? (
+          token ? (
             <div
               className={`  hidden  text-white  rounded-[30px] sm:relative    sm:flex `}
             >
@@ -93,7 +93,7 @@ export const Navbar = () => {
             <div className="  sm:flex">
               {Object.keys(data.emailOrMobile).length > 0 &&
               Object.keys(data.Password).length > 0 &&
-              Login ? (
+              token ? (
                 <div
                   className={`    text-white  rounded-[30px] sm:relative     `}
                 >

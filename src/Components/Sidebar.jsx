@@ -26,10 +26,10 @@ export const Sidebar = () => {
               "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("General physician");
+              setDoctorcategory("Cardiologist");
             }}
           >
-            General physician
+            Cardiologist
           </li>
           <li
             className={`p-2 text-center border border-black  ${
@@ -56,10 +56,10 @@ export const Sidebar = () => {
               Doctorcategory === "Pediatricians" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("Pediatricians");
+              setDoctorcategory("Pediatrician");
             }}
           >
-            Pediatricians
+            Pediatrician
           </li>
           <li
             className={`p-2 text-center border border-black  ${
@@ -77,10 +77,10 @@ export const Sidebar = () => {
               "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("Gastroenterologist");
+              setDoctorcategory("Surgeon");
             }}
           >
-            Gastroenterologist
+            Surgeon
           </li>
         </ul>
       </div>
