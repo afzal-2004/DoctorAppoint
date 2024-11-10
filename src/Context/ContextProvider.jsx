@@ -10,11 +10,12 @@ export const ContextProvider = ({ children }) => {
   const [Opennav, setOpenNav] = useState(false);
   const [Doctor, setDoctor] = useState([]);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
-  const [Time, setTime] = useState(null);
-  const [day, setday] = useState(null);
+  const [Time, setTime] = useState(0);
+  const [day, setday] = useState(0);
   const [Login, setLogin] = useState(false);
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
   const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
+  console.log(NextSevenBookingDate[day]?.dayName);
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [Profile, setProfile] = useState([]);
 

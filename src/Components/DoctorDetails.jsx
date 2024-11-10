@@ -22,6 +22,7 @@ export const DoctorDetails = () => {
     NextSevenBookingDate,
     setNextSevenBookingDate,
     token,
+    addDoctorAppointment,
   } = useContext(AppContext);
 
   const { id } = useParams();
@@ -92,7 +93,7 @@ export const DoctorDetails = () => {
                 {Doctor.about}
               </p>
               <p className="font-semibold flex gap-2">
-                Doctor Fees :<span>{Doctor.fees}$</span>
+                Doctor Fees :<span>{Doctor.doctorFees}rs</span>
               </p>
             </div>
 
@@ -120,7 +121,7 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div className=" flex  flex-wrap gap-4  cursor-pointer">
-                {Doctor.apointmentTime?.map((time, i) => (
+                {Doctor.appointmentTime?.map((time, i) => (
                   <div
                     className={`border border-gray-400 py-2   px-3 rounded-2xl sm:min-w-[150px] min-w-[100px] text-center ${
                       Time === i && "bg-blue-500 text-white"
@@ -153,8 +154,11 @@ export const DoctorDetails = () => {
                     <FaArrowRight />
                   </button>
                 ) : (
-                  <Link to={`/patientDetails/${id}`}>
-                    <button className="m-[5vh] border bg-blue-500 rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center">
+                  <Link to={"/Appointments"}>
+                    <button
+                      className="m-[5vh] border bg-blue-500 rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center"
+                      onClick={() => addDoctorAppointment(id)}
+                    >
                       Book an appointment
                       <FaArrowRight />
                     </button>

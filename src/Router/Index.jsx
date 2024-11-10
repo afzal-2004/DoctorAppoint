@@ -8,7 +8,7 @@ import { Doctors } from "../Pages/Doctors/Doctors";
 import { Sidebar } from "../Components/Sidebar";
 import { Login, Register } from "../Components/LoginAndRegister";
 import { DoctorDetails } from "../Components/DoctorDetails";
-import { PatinentDetails } from "../Components/PatinentDetails";
+
 import { MyProfile } from "../Components/UserProfile";
 import { MyAppointments } from "../Components/MyAppointments";
 /* ALL ADMIN PABEL REALTED ROITES IS DEFINED HERE*/
@@ -32,7 +32,7 @@ export const Index = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/allDoctors/:id" element={<DoctorDetails />} />
-            <Route path="/patientDetails/:id" element={<PatinentDetails />} />
+
             <Route path="/userProfile" element={<MyProfile />} />
             <Route path="/Appointments" element={<MyAppointments />} />
             <Route path="/allDoctors" element={<DoctorOutlet />}>

@@ -2,16 +2,17 @@
 import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import { Backend_Url } from "../../public/contstant";
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const { AppointmentsDoctorsid, NextSevenBookingDate, Time, day } =
     useContext(AppContext);
-
+  console.log("This  is Appointend Doctor id", AppointmentsDoctorsid);
   const [AppointedDoc, setAppointedDoc] = useState([]);
 
   useEffect(() => {
-    axios.get("/Doctor.json").then((res) => {
+    axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
       const Doctordata = res.data;
       const Doctors = Doctordata?.filter((doc) =>
         AppointmentsDoctorsid.includes(doc._id)
@@ -28,7 +29,7 @@ export const MyAppointments = () => {
           <div key={i} className="   sm:flex">
             <div className="  mt-[3vh] sm:m-[3vh]  sm:flex  gap-3 border   w-full  border-slate-400 p-2 rounded-md">
               <img
-                src={`${doctor.image}`}
+                src={`${doctor.avtar}`}
                 alt="Doctorimage"
                 className="   object-cover  bg-blue-500 sm:max-w-[200px]   rounded-xl p-0  "
               />
@@ -48,12 +49,12 @@ export const MyAppointments = () => {
                   </p>
 
                   <p>Date & Time</p>
-                  <span>
+                  {/* <span>
                     {`${NextSevenBookingDate[day]?.dayName} ${NextSevenBookingDate[day]?.dayDate}`}{" "}
                     | {doctor.apointmentTime[Time]}
-                  </span>
-                  <p>Fees</p>
-                  <span>{doctor.fees}$</span>
+                  </span> */}
+                  <p>Fees :</p>
+                  <span>{doctor.doctorFees}rs</span>
                 </div>
                 <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
                   <button
