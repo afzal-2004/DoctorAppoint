@@ -15,20 +15,16 @@ export const DoctorDetails = () => {
     setDoctor,
     RelatedDoctor,
     setRelatedDoctor,
-    day,
-    setday,
     Time,
     setTime,
-    NextSevenBookingDate,
-    setNextSevenBookingDate,
+    Date,
+    setDate,
     token,
     addDoctorAppointment,
   } = useContext(AppContext);
 
   const { id } = useParams();
-  const date = new Date();
-
-  const Day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  // console.log("This is My Current date ", Date);
 
   useEffect(() => {
     axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
@@ -46,22 +42,6 @@ export const DoctorDetails = () => {
       setDoctor(DoctorDetail);
     });
   }, [id]);
-
-  useEffect(() => {
-    const nextSevenDays = [];
-
-    for (let i = 0; i < 7; i++) {
-      const nextDate = new Date(date);
-      nextDate.setDate(date.getDate() + i);
-
-      const dayName = Day[nextDate.getDay()];
-      const dayDate = nextDate.getDate();
-
-      nextSevenDays.push({ dayName, dayDate });
-    }
-
-    setNextSevenBookingDate(nextSevenDays);
-  }, []);
 
   return (
     <>
@@ -100,25 +80,20 @@ export const DoctorDetails = () => {
             <div className="mt-[5vh]">
               <h1 className="font-semibold">Booking Slots</h1>
               <div className="flex  flex-wrap gap-4 md:gap-7  mt-5  m-5">
-                {NextSevenBookingDate.map((dayObj, i) => (
-                  <p
-                    key={i}
-                    className={` border border-slate-400 max-w-[50px]  rounded-full flex flex-col  p-4  items-center  cursor-pointer justify-center ${
-                      day === i ? "bg-blue-500 text-white" : ""
-                    }`}
-                    onClick={() => {
-                      setday(i);
-                      console.log(
-                        "User Select This date for doctor meetUp :",
-                        dayObj
-                      );
-                    }}
-                  >
-                    <span>{dayObj.dayName}</span>
-
-                    <span>{dayObj.dayDate}</span>
-                  </p>
-                ))}
+                <input
+                  type="date"
+                  name=""
+                  id=""
+                  className="p-1"
+                  onChange={(e) => {
+                    setDate(e.target.value);
+                  }}
+                />
+                <span className="text-[15px] text-red-500 flex items-center gap-1">
+                  {" "}
+                  <FaCircleExclamation />
+                  Book Appoinment With In Next 7 days{" "}
+                </span>
               </div>
               <div className=" flex  flex-wrap gap-4  cursor-pointer">
                 {Doctor.appointmentTime?.map((time, i) => (
@@ -143,11 +118,13 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                {!token ? (
+                {!token || !Date ? (
                   <button
-                    disabled={!token}
+                    disabled={!token || !Date}
                     className={`m-[5vh] border ${
-                      !token ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
+                      !token || !Date
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-blue-500"
                     } rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center`}
                   >
                     Book an appointment

@@ -6,9 +6,7 @@ import { Backend_Url } from "../../public/contstant";
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const { AppointmentsDoctorsid, NextSevenBookingDate, Time, day } =
-    useContext(AppContext);
-  console.log("This  is Appointend Doctor id", AppointmentsDoctorsid);
+  const { AppointmentsDoctorsid, Time, Date } = useContext(AppContext);
   const [AppointedDoc, setAppointedDoc] = useState([]);
 
   useEffect(() => {
@@ -49,10 +47,7 @@ export const MyAppointments = () => {
                   </p>
 
                   <p>Date & Time</p>
-                  {/* <span>
-                    {`${NextSevenBookingDate[day]?.dayName} ${NextSevenBookingDate[day]?.dayDate}`}{" "}
-                    | {doctor.apointmentTime[Time]}
-                  </span> */}
+
                   <p>Fees :</p>
                   <span>{doctor.doctorFees}rs</span>
                 </div>

@@ -11,11 +11,9 @@ export const ContextProvider = ({ children }) => {
   const [Doctor, setDoctor] = useState([]);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(0);
-  const [day, setday] = useState(0);
+  const [Date, setDate] = useState("");
   const [Login, setLogin] = useState(false);
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
-  const [NextSevenBookingDate, setNextSevenBookingDate] = useState([]);
-  console.log(NextSevenBookingDate[day]?.dayName);
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [Profile, setProfile] = useState([]);
 
@@ -40,23 +38,24 @@ export const ContextProvider = ({ children }) => {
     }
   }, []);
 
-  const ProfileData = () => {
-    console.log("This is Profile data ", Profile);
-    axios
-      .get(`${Backend_Url}/Userprofile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((e) => console.log(e));
-  };
+  // const ProfileData = () => {
+  //   console.log("This is Profile data ", Profile);
+  //   axios
+  //     .get(`${Backend_Url}/Userprofile`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((e) => {
+  //       console.log(e);
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
 
   useEffect(() => {
     setDoctorcategory("");
   }, []);
+
   const addDoctorAppointment = (doctorId) => {
     setAppointmentsDoctorsid((prevAppointments) => [
       ...prevAppointments,
@@ -71,10 +70,10 @@ export const ContextProvider = ({ children }) => {
     RelatedDoctor,
     setRelatedDoctor,
     setDoctor,
-    day,
-    setday,
     Time,
     setTime,
+    Date,
+    setDate,
     data,
     setdata,
     Profile,
@@ -86,9 +85,7 @@ export const ContextProvider = ({ children }) => {
     AppointmentsDoctorsid,
     setAppointmentsDoctorsid,
     addDoctorAppointment,
-    NextSevenBookingDate,
-    setNextSevenBookingDate,
-    ProfileData,
+    // ProfileData,
     token,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
