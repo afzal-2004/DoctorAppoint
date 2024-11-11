@@ -6,18 +6,36 @@ import { Backend_Url } from "../../public/contstant";
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const { AppointmentsDoctorsid, Time, Date } = useContext(AppContext);
+  const { Time, Date, token, setTime, setDate } = useContext(AppContext);
+
+  const [Appointedid, setAppointedid] = useState("");
   const [AppointedDoc, setAppointedDoc] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${Backend_Url}/AccessAppointedDoctor`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((e) => {
+        setAppointedid(e.data.Doctor);
+        setTime(e.data.appointedTime);
+        setDate(e.data.Date);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Appointedid]);
 
   useEffect(() => {
     axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
       const Doctordata = res.data;
       const Doctors = Doctordata?.filter((doc) =>
-        AppointmentsDoctorsid.includes(doc._id)
+        Appointedid.includes(doc._id)
       );
       setAppointedDoc(Doctors);
     });
-  }, [AppointmentsDoctorsid]);
+  }, [Appointedid]);
 
   return (
     <>
@@ -47,8 +65,11 @@ export const MyAppointments = () => {
                   </p>
 
                   <p>Date & Time</p>
+                  <span>{Date}</span>
 
-                  <p>Fees :</p>
+                  <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span>
+
+                  <p>Fees:</p>
                   <span>{doctor.doctorFees}rs</span>
                 </div>
                 <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">

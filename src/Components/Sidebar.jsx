@@ -22,8 +22,7 @@ export const Sidebar = () => {
           </li>
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "General physician" &&
-              "bg-blue-500 text-slate-100"
+              Doctorcategory === "Cardiologist" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
               setDoctorcategory("Cardiologist");
@@ -53,7 +52,7 @@ export const Sidebar = () => {
           </li>
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "Pediatricians" && "bg-blue-500 text-slate-100"
+              Doctorcategory === "Pediatrician" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
               setDoctorcategory("Pediatrician");
@@ -73,8 +72,7 @@ export const Sidebar = () => {
           </li>
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "Gastroenterologist" &&
-              "bg-blue-500 text-slate-100"
+              Doctorcategory === "Surgeon" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
               setDoctorcategory("Surgeon");

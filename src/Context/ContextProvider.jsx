@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
+
 import { AppContext } from "./AppContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { Backend_Url } from "../../public/contstant";
 import Cookies from "js-cookie";
 export const ContextProvider = ({ children }) => {
@@ -12,6 +14,7 @@ export const ContextProvider = ({ children }) => {
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(0);
   const [Date, setDate] = useState("");
+
   const [Login, setLogin] = useState(false);
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
   const [Doctorcategory, setDoctorcategory] = useState("All");
@@ -61,6 +64,22 @@ export const ContextProvider = ({ children }) => {
       ...prevAppointments,
       doctorId,
     ]);
+    axios
+      .post(
+        `${Backend_Url}/AppointedDoctor/${doctorId}`,
+        {
+          date: Date,
+          appointedTime: Time,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((e) => {
+        console.log(e);
+        toast.success(e.data?.message);
+      })
+      .catch((e) => console.log(e));
   };
 
   const value = {
