@@ -7,8 +7,10 @@ import { AppContext } from "../Context/AppContext";
 
 export const Navbar = () => {
   const { token, setOpenNav, Opennav } = useContext(AppContext);
+  // console.log("This is My token", token);
+  // const { data } = useContext(AppContext);
+  // console.log("This is My data", data);
 
-  const { data } = useContext(AppContext);
   const handleNav = () => {
     setOpenNav(!Opennav);
   };
@@ -54,9 +56,7 @@ export const Navbar = () => {
         </ul>
 
         <div className=" hidden sm:flex">
-          {Object.keys(data.emailOrMobile).length > 0 &&
-          Object.keys(data.Password).length > 0 &&
-          token ? (
+          {token ? (
             <div
               className={`  hidden  text-white  rounded-[30px] sm:relative    sm:flex `}
             >
@@ -91,9 +91,7 @@ export const Navbar = () => {
               </li>
             </ul>
             <div className="  sm:flex">
-              {Object.keys(data.emailOrMobile).length > 0 &&
-              Object.keys(data.Password).length > 0 &&
-              token ? (
+              {token ? (
                 <div
                   className={`    text-white  rounded-[30px] sm:relative     `}
                 >

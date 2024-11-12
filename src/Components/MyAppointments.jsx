@@ -8,7 +8,8 @@ export const MyAppointments = () => {
   // eslint-disable-next-line no-unused-vars
   const { Time, Date, token, setTime, setDate } = useContext(AppContext);
 
-  const [Appointedid, setAppointedid] = useState("");
+  const [Appointedid, setAppointedid] = useState([]);
+  // console.log(Appointedid);
   const [AppointedDoc, setAppointedDoc] = useState([]);
 
   useEffect(() => {
@@ -17,6 +18,8 @@ export const MyAppointments = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((e) => {
+        // e.preventDefault();
+
         setAppointedid(e.data.Doctor);
         setTime(e.data.appointedTime);
         setDate(e.data.Date);

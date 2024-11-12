@@ -14,46 +14,39 @@ export const ContextProvider = ({ children }) => {
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(0);
   const [Date, setDate] = useState("");
-
+  // console.log(Date);
   const [Login, setLogin] = useState(false);
   const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
+  console.log("Current total Appointed Doctors ", AppointmentsDoctorsid);
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [Profile, setProfile] = useState([]);
 
   const [data, setdata] = useState({
-    emailOrMobile: "moa44468@gmail.com",
-    Password: "123456",
+    emailOrMobile: "",
+    //moa44468@gmail.com
+    Password: "",
+    // 123456
   });
 
   useEffect(() => {
     // Check for token in cookies on component mount
     if (token) {
-      axios
-        .get(`${Backend_Url}/Userprofile`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => {
-          setProfile(response.data?.FindUser);
-        })
-        .catch((error) => {
-          console.log("Error fetching profile:", error);
-        });
+      ProfileData();
     }
-  }, []);
+  }, [token]);
 
-  // const ProfileData = () => {
-  //   console.log("This is Profile data ", Profile);
-  //   axios
-  //     .get(`${Backend_Url}/Userprofile`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     .then((e) => {
-  //       console.log(e);
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
+  const ProfileData = () => {
+    axios
+      .get(`${Backend_Url}/Userprofile`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setProfile(response.data?.FindUser);
+      })
+      .catch((error) => {
+        console.log("Error fetching profile:", error);
+      });
+  };
 
   useEffect(() => {
     setDoctorcategory("");
@@ -104,7 +97,7 @@ export const ContextProvider = ({ children }) => {
     AppointmentsDoctorsid,
     setAppointmentsDoctorsid,
     addDoctorAppointment,
-    // ProfileData,
+    ProfileData,
     token,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -1,16 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Profile_pic from "../assets/frontend/profile_pic.png";
 // import { CiEdit } from "react-icons/ci";
 import { AppContext } from "../Context/AppContext";
 import { FaChevronLeft } from "react-icons/fa";
 import "./Components.css";
+
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Backend_Url } from "../../public/contstant";
 import Cookies from "js-cookie";
 export const UserProfile = () => {
-  const token = Cookies.get("token");
-  const { Profile, setOpenNav } = useContext(AppContext);
+  const { Profile, setOpenNav, token } = useContext(AppContext);
   // console.log("This is my Profile data ", Profile);
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
 
@@ -56,7 +59,28 @@ export const UserProfile = () => {
   );
 };
 const ProfileSidebar = ({ handelProfileNav }) => {
-  const { setOpenNav } = useContext(AppContext);
+  const navigate = useNavigate();
+  const { setOpenNav, token, ProfileData } = useContext(AppContext);
+
+  const handleLogout = () => {
+    axios
+      .post(
+        `${Backend_Url}/Logout`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((e) => {
+        toast.success(`${e.data?.message}`);
+        Cookies.remove("token");
+        ProfileData();
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      })
+      .catch((e) => console.log(e));
+  };
   return (
     <>
       <div
@@ -81,7 +105,13 @@ const ProfileSidebar = ({ handelProfileNav }) => {
           </Link>
 
           <Link>
-            <li className="p-1  hover:text-blue-500" onClick={handelProfileNav}>
+            <li
+              className="p-1  hover:text-blue-500"
+              onClick={() => {
+                handleLogout();
+                handelProfileNav();
+              }}
+            >
               Logout
             </li>
           </Link>

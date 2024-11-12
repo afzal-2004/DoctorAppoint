@@ -131,9 +131,10 @@ export const Login = () => {
   const { data, setdata, setLogin, setProfile } = useContext(AppContext);
 
   const handleChange = (e) => {
+    e.preventDefault();
     setdata({
       ...data,
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     });
   };
   const handleData = (e) => {
