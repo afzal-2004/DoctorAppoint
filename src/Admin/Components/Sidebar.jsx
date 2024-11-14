@@ -7,10 +7,11 @@ export const AdminSidebar = () => {
 
   return (
     <div
-      className="   min-h-[98vh] m-auto  border-black border border-r-2 border-l-0 border-b-0 border-t-0   p-1 w-[30%]    
-     sm:min-w-[20%] md:min-w-[20%]  cursor-pointer  hidden sm:block"
+      className="   xl:min-h-[98vh] m-auto  border-black xl:border xl:border-r-2 border-l-0 border-b-0 border-t-0   p-1 
+        
+     sm:min-w-[20%] md:min-w-[20%]  cursor-pointer  sm:block"
     >
-      <ul className="flex flex-col gap-y-3  text-nowrap">
+      <ul className="flex xl:flex-col flex-row gap-y-3  text-nowrap">
         <Link to={"/adminLayout"}>
           <li
             className={`flex items-center  gap-x-5 p-2 w-full  sm:text-[20px] flex-nowrap ${

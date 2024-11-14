@@ -1,8 +1,28 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Backend_Url } from "../../../public/contstant";
+
 export const AdminHome = () => {
+  const [length, setlength] = useState([]);
+
+  const AcessDoctorData = () => {
+    axios
+      .get(`${Backend_Url}/getDoctorlist`)
+      .then((e) => {
+        setlength(e.data.length);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  useEffect(() => {
+    AcessDoctorData();
+  }, []);
+
   const TotalDoctor = [
     {
       image: "🧑‍⚕️",
-      Active: "14",
+      Active: length,
       text: "Doctor",
     },
     {

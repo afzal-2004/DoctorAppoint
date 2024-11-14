@@ -10,16 +10,12 @@ import Cookies from "js-cookie";
 export const ContextProvider = ({ children }) => {
   const token = Cookies.get("token");
   const [Opennav, setOpenNav] = useState(false);
-  const [Doctor, setDoctor] = useState([]);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(0);
   const [Date, setDate] = useState("");
-  // console.log(Date);
-  const [Login, setLogin] = useState(false);
-  const [AppointmentsDoctorsid, setAppointmentsDoctorsid] = useState([]);
-  console.log("Current total Appointed Doctors ", AppointmentsDoctorsid);
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [Profile, setProfile] = useState([]);
+  const [Doctordata, setDoctordata] = useState([]);
 
   const [data, setdata] = useState({
     emailOrMobile: "",
@@ -53,10 +49,10 @@ export const ContextProvider = ({ children }) => {
   }, []);
 
   const addDoctorAppointment = (doctorId) => {
-    setAppointmentsDoctorsid((prevAppointments) => [
-      ...prevAppointments,
-      doctorId,
-    ]);
+    // setAppointmentsDoctorsid((prevAppointments) => [
+    //   ...prevAppointments,
+    //   doctorId,
+    // ]);
     axios
       .post(
         `${Backend_Url}/AppointedDoctor/${doctorId}`,
@@ -78,10 +74,8 @@ export const ContextProvider = ({ children }) => {
   const value = {
     Opennav,
     setOpenNav,
-    Doctor,
     RelatedDoctor,
     setRelatedDoctor,
-    setDoctor,
     Time,
     setTime,
     Date,
@@ -90,14 +84,12 @@ export const ContextProvider = ({ children }) => {
     setdata,
     Profile,
     setProfile,
-    Login,
-    setLogin,
     Doctorcategory,
     setDoctorcategory,
-    AppointmentsDoctorsid,
-    setAppointmentsDoctorsid,
     addDoctorAppointment,
     ProfileData,
+    Doctordata,
+    setDoctordata,
     token,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

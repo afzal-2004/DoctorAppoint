@@ -1,13 +1,11 @@
 import { DoctorCard } from "../../Components/DoctorCard";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import { Backend_Url } from "../../../public/contstant";
 export const Doctors = () => {
-  const [Doctordata, setDoctordata] = useState([]);
-
-  const { Doctorcategory } = useContext(AppContext);
+  const { Doctorcategory, Doctordata, setDoctordata } = useContext(AppContext);
 
   useEffect(() => {
     if (Doctorcategory === "All") {
@@ -26,6 +24,7 @@ export const Doctors = () => {
         setDoctordata(filterd);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Doctorcategory]);
   return (
     <>

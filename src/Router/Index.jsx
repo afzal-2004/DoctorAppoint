@@ -75,10 +75,10 @@ export const AdminLayout = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="  border-black border border-r-0 border-l-0 border-b-0 border-t-2  flex ">
+      <div className="   border-black sm:border border-r-0 border-l-0 border-b-0 border-t-2  flex flex-col xl:flex-row ">
         <AdminSidebar />
         <div
-          className="bg-blue-50  m-auto  p-4 w-[100%]   
+          className="bg-blue-50  m-auto mt-4 xl:mt-0  p-4 w-[100%]   
         sm:min-w-[80%] md:min-w-[80%]  h-[98vh]    
    "
         >
