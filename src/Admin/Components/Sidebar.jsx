@@ -7,7 +7,7 @@ export const AdminSidebar = () => {
 
   return (
     <div
-      className="   h-[98vh] m-auto  border-black border border-r-2 border-l-0 border-b-0 border-t-0   p-1 w-[30%]  
+      className="   min-h-[98vh] m-auto  border-black border border-r-2 border-l-0 border-b-0 border-t-0   p-1 w-[30%]    
      sm:min-w-[20%] md:min-w-[20%]  cursor-pointer  hidden sm:block"
     >
       <ul className="flex flex-col gap-y-3  text-nowrap">

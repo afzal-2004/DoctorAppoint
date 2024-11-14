@@ -7,9 +7,6 @@ import { AppContext } from "../Context/AppContext";
 
 export const Navbar = () => {
   const { token, setOpenNav, Opennav } = useContext(AppContext);
-  // console.log("This is My token", token);
-  // const { data } = useContext(AppContext);
-  // console.log("This is My data", data);
 
   const handleNav = () => {
     setOpenNav(!Opennav);
@@ -52,6 +49,9 @@ export const Navbar = () => {
           </li>
           <li>
             <NavLink to={"/contact"}>Contact</NavLink>
+          </li>
+          <li className="text-[12px] border border-blue-200 rounded-xl px-2 py-1 ">
+            <NavLink to={"/admin"}>Admin</NavLink>
           </li>
         </ul>
 

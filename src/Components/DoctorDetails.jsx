@@ -24,7 +24,6 @@ export const DoctorDetails = () => {
   } = useContext(AppContext);
 
   const { id } = useParams();
-  // console.log("This is My Current date ", Date);
 
   useEffect(() => {
     axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {

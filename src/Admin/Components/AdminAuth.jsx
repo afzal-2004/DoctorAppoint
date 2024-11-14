@@ -1,9 +1,42 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-
+import { Backend_Url } from "../../../public/contstant";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 export const AdminAuth = () => {
   const navigate = useNavigate();
-  const handleAdminLogin = () => {
-    navigate("/adminLayout");
+  const [Data, setData] = useState({
+    emailOrMobile: "admin@gmail.com",
+    Password: "123",
+  });
+  const handlechange = (e) => {
+    e.preventDefault();
+    setData({
+      ...Data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  console.log("This is My admin loghin data", Data);
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${Backend_Url}/adminLogin`, Data)
+      .then((e) => {
+        handlechange;
+        console.log(e);
+        const adminToken = e.data.AccessToken;
+        Cookies.set("adminToken", adminToken);
+        toast.success(`${e.data?.message}`, {});
+
+        setTimeout(() => {
+          navigate("/adminLayout");
+        }, 1000);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <>
@@ -22,7 +55,9 @@ export const AdminAuth = () => {
               type="text"
               name="emailOrMobile"
               className="loginForminput"
-              //   required
+              required
+              value={Data.emailOrMobile}
+              onChange={handlechange}
             />
           </div>
 
@@ -34,7 +69,9 @@ export const AdminAuth = () => {
               type="password"
               name="Password"
               className="loginForminput"
-              //   required
+              required
+              value={Data.Password}
+              onChange={handlechange}
             />
           </div>
 

@@ -3,6 +3,7 @@ import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Backend_Url } from "../../public/contstant";
+// import { FaCircleExclamation } from "react-icons/fa6";
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
@@ -92,6 +93,11 @@ export const MyAppointments = () => {
             </div>
           </div>
         ))}
+        {/* <span className="text-[15px] text-red-500 flex items-center gap-1">
+          {" "}
+          <FaCircleExclamation />
+          Book One Appointment at a Single time
+        </span> */}
       </div>
 
       {Cancel && <CancelPopup setCancel={setCancel} />}

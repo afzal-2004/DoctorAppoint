@@ -1,3 +1,9 @@
+import { Doctors } from "../../Pages/Doctors/Doctors";
+
 export const DoctorList = () => {
-  return <div>DoctorList</div>;
+  return (
+    <>
+      <Doctors />
+    </>
+  );
 };
