@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-
+import axios from "axios";
+import { Backend_Url } from "../../../public/contstant";
+import Cookies from "js-cookie";
 export const AddDoctor = () => {
+  const AdminToken = Cookies.get("adminToken");
   const [Data, setData] = useState({
     name: "",
     speciality: "",
@@ -14,18 +17,27 @@ export const AddDoctor = () => {
     addresss: "",
     about: "",
   });
-  console.log("This is My Adding New doctor data ", Data);
+  // console.log("This is My Adding New doctor data ", Data);
   const handleChange = (e) => {
     setData({
       ...Data,
       [e.target.name]: e.target.value,
     });
   };
+  const HandleSumbit = () => {
+    axios
+      .post(`${Backend_Url}/addNewDoctor`, Data, {
+        headers: { Authorization: `Bearer ${AdminToken}` },
+      })
+      .then((e) => console.log(e))
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <>
       <div className=" sm:w-[90%] w-[100%] m-auto">
-        <h1 className=" font-semibold">Add Doctor</h1>
-        <form action="" className=" bg-white p-3 mt-3">
+        <form action="" onSubmit={HandleSumbit} className=" bg-white p-3 mt-3">
           <main className=" flex gap-x-5 items-center justify-center">
             <div className=" w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] relative">
               <div className=" sm:w-[150px] w-[100px] h-[100px]  sm:h-[150px] absolute bg-slate-300  rounded-full flex justify-center items-center">
@@ -106,7 +118,7 @@ export const AddDoctor = () => {
               value={Data.appointmentTime}
             />
           </section>
-          <div className="w-full mt-7">
+          <div className="w-full mt-2">
             <label htmlFor="About Doctor">About Doctor</label>
             <textarea
               name=""
@@ -115,6 +127,13 @@ export const AddDoctor = () => {
               className=" w-full border border-black  mt-1  p-2 h-[100px]"
             ></textarea>
           </div>
+          <button
+            className="bg-red-500 p-2 border 
+          border-black rounded-lg"
+          >
+            {" "}
+            Post Doctor
+          </button>
         </form>
       </div>
     </>

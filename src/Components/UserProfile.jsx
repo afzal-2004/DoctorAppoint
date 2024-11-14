@@ -14,7 +14,7 @@ import { Backend_Url } from "../../public/contstant";
 import Cookies from "js-cookie";
 export const UserProfile = () => {
   const { Profile, setOpenNav, token } = useContext(AppContext);
-  // console.log("This is my Profile data ", Profile);
+
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
 
   const handelProfileNav = (OpenProfilenav) => {

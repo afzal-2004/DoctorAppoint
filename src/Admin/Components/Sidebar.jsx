@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaAddressBook } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
 import { useState } from "react";
+import axios from "axios";
+import { Backend_Url } from "../../../public/contstant";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 export const AdminSidebar = () => {
   const [navItem, setnavItem] = useState("1");
 
@@ -52,6 +56,30 @@ export const AdminSidebar = () => {
 };
 
 export const AdminNavbar = () => {
+  const AdminToken = Cookies.get("adminToken");
+  const navigate = useNavigate();
+
+  const Handlelogout = () => {
+    axios
+      .post(
+        `${Backend_Url}/adminLogout`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${AdminToken}` },
+        }
+      )
+      .then((e) => {
+        console.log(e);
+        toast.success(`${e.data.message}`);
+        Cookies.remove("adminToken");
+        setTimeout(() => {
+          navigate("/admin");
+        }, 1000);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <nav className="   flex  justify-between items-center p-2 h-[50px] sm:h-[70px]  ">
       <Link to={"/"} className=" font-semibold sm:text-[20px] text-[27px]">
@@ -61,7 +89,14 @@ export const AdminNavbar = () => {
         </h1>
       </Link>
 
-      <button className="bg-blue-400 px-4 py-2  rounded-xl">Logout</button>
+      <button
+        className="bg-blue-400 px-4 py-2  rounded-xl"
+        onClick={() => {
+          Handlelogout();
+        }}
+      >
+        Logout
+      </button>
     </nav>
   );
 };

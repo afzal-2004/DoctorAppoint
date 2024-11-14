@@ -49,10 +49,6 @@ export const ContextProvider = ({ children }) => {
   }, []);
 
   const addDoctorAppointment = (doctorId) => {
-    // setAppointmentsDoctorsid((prevAppointments) => [
-    //   ...prevAppointments,
-    //   doctorId,
-    // ]);
     axios
       .post(
         `${Backend_Url}/AppointedDoctor/${doctorId}`,
