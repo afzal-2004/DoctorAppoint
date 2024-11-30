@@ -5,7 +5,11 @@ import axios from "axios";
 import { Backend_Url } from "../../../public/contstant";
 import Cookies from "js-cookie";
 export const AddDoctor = () => {
-  const AdminToken = Cookies.get("adminToken");
+  const AdminToken = Cookies.get("token");
+
+  const [avtar, setavtar] = useState(null);
+  console.log(" This is My file ", File);
+  const [about, setabout] = useState("Hii This is Afzal An Talak Specilist");
   const [Data, setData] = useState({
     name: "",
     speciality: "",
@@ -15,21 +19,50 @@ export const AddDoctor = () => {
     degree: "",
     appointmentTime: "",
     addresss: "",
-    about: "",
   });
-  // console.log("This is My Adding New doctor data ", Data);
+  const handleFileChange = (e) => {
+    setavtar(e.target.files[0]);
+  };
   const handleChange = (e) => {
     setData({
       ...Data,
       [e.target.name]: e.target.value,
     });
   };
-  const HandleSumbit = () => {
+  const HandleSumbit = (e) => {
+    e.preventDefault();
+    const Formdata = new FormData();
+    Formdata.append("avtar", avtar);
+    Formdata.append("name", Data.name);
+    Formdata.append("speciality", Data.speciality);
+    Formdata.append("email", Data.email);
+    Formdata.append("doctorFees", Data.doctorFees);
+    Formdata.append("experience", Data.experience);
+    Formdata.append("degree", Data.degree);
+    Formdata.append("appointmentTime", Data.appointmentTime);
+    Formdata.append("addresss", Data.addresss);
+    Formdata.append("about", about);
+
     axios
-      .post(`${Backend_Url}/addNewDoctor`, Data, {
+      .post(`${Backend_Url}/addNewDoctor`, Formdata, {
         headers: { Authorization: `Bearer ${AdminToken}` },
       })
-      .then((e) => console.log(e))
+      .then((e) => {
+        console.log(e);
+
+        setData({
+          name: "",
+          speciality: "",
+          email: "",
+          doctorFees: "",
+          experience: "",
+          degree: "",
+          appointmentTime: "",
+          addresss: "  ",
+        });
+        setabout("");
+        setavtar(null);
+      })
       .catch((e) => {
         console.log(e);
       });
@@ -48,11 +81,18 @@ export const AddDoctor = () => {
                 name=""
                 id=""
                 className="  sm:w-[150px] w-[100px] sm:h-[150px] h-[100px]  absolute opacity-0 "
+                onChange={handleFileChange}
               />
             </div>
             <p className="text-slate-400">
               <span>
-                Upload Doctor <br /> Picture
+                {!avtar ? (
+                  <>
+                    Upload Doctor <br /> Picture
+                  </>
+                ) : (
+                  avtar.name
+                )}
               </span>
             </p>
           </main>
@@ -65,11 +105,12 @@ export const AddDoctor = () => {
               value={Data.name}
             />
             <div className=" flex flex-col justify-between gap-x-3  m-2">
-              <label htmlFor="Doctor Name">Speciality</label>
-              <input
-                type="text"
-                placeholder="Name"
-                className=" border border-black  outline-none p-2 m-2 rounded-md sm:text-[18px] text-[16px] text-black"
+              <DoctorInput
+                labelField={"Speciality"}
+                placeholder={"Speciality"}
+                event={handleChange}
+                name="Speciality"
+                value={Data.email}
               />
             </div>
             <DoctorInput
@@ -121,10 +162,14 @@ export const AddDoctor = () => {
           <div className="w-full mt-2">
             <label htmlFor="About Doctor">About Doctor</label>
             <textarea
-              name=""
+              name="about"
               id=""
+              value={about}
               placeholder="Message"
               className=" w-full border border-black  mt-1  p-2 h-[100px]"
+              onChange={(e) => {
+                setabout(e.target.value);
+              }}
             ></textarea>
           </div>
           <button

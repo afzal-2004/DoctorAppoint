@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaCircleExclamation } from "react-icons/fa6";
 import { DoctorCard } from "./DoctorCard";
@@ -10,9 +10,8 @@ import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
 import { Backend_Url } from "../../public/contstant";
 export const DoctorDetails = () => {
+  const [Doctor, setDoctor] = useState([]);
   const {
-    Doctor,
-    setDoctor,
     RelatedDoctor,
     setRelatedDoctor,
     Time,
@@ -24,12 +23,14 @@ export const DoctorDetails = () => {
   } = useContext(AppContext);
 
   const { id } = useParams();
+  console.log("This is The the id if seected Doctor ", id);
 
   useEffect(() => {
     axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
       const Doctordata = res.data;
       const DoctorDetail = Doctordata?.find((doc) => doc._id === id);
-
+      setDoctor(DoctorDetail);
+      console.log("I want to the details of this doctor ", DoctorDetail);
       const Specility = DoctorDetail.speciality;
       const filterd = Doctordata.filter(
         (item) =>
@@ -48,19 +49,19 @@ export const DoctorDetails = () => {
         <main className="md:flex gap-10  p-4  ">
           <div className=" ">
             <img
-              src={`${Doctor.avtar}`}
+              src={`${Doctor?.avtar}`}
               alt="Doctorimage"
               className="w-full    object-cover  bg-blue-500 sm:min-w-[300px]   rounded-xl p-0  "
             />
           </div>
           <div>
             <div className="border   border-slate-300 p-4 rounded-lg mt-[5vh] sm:mt-0 ">
-              <h1>{Doctor.name}</h1>
+              <h1>{Doctor?.name}</h1>
               <ul className="flex  gap-2 ">
-                <li className="p-1 font-bold text-red-600">{Doctor.degree}</li>
-                <li className="p-1">{Doctor.speciality}</li>
+                <li className="p-1 font-bold text-red-600">{Doctor?.degree}</li>
+                <li className="p-1">{Doctor?.speciality}</li>
                 <li className="border border-slate-500 rounded-3xl py-1 px-2">
-                  {Doctor.experience} exp
+                  {Doctor?.experience} exp
                 </li>
               </ul>
 
@@ -69,10 +70,10 @@ export const DoctorDetails = () => {
                 About
               </span>
               <p className="text-slate-400  xl:max-w-[70%] xl:text-[17px]">
-                {Doctor.about}
+                {Doctor?.about}
               </p>
               <p className="font-semibold flex gap-2">
-                Doctor Fees :<span>{Doctor.doctorFees}rs</span>
+                Doctor Fees :<span>{Doctor?.doctorFees}rs</span>
               </p>
             </div>
 
@@ -95,7 +96,7 @@ export const DoctorDetails = () => {
                 </span>
               </div>
               <div className=" flex  flex-wrap gap-4  cursor-pointer">
-                {Doctor.appointmentTime?.map((time, i) => (
+                {Doctor?.appointmentTime?.map((time, i) => (
                   <div
                     className={`border border-gray-400 py-2   px-3 rounded-2xl sm:min-w-[150px] min-w-[100px] text-center ${
                       Time === i && "bg-blue-500 text-white"
