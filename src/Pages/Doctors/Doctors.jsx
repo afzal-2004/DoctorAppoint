@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { DoctorCard } from "../../Components/DoctorCard";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import { Backend_Url } from "../../../public/contstant";
-export const Doctors = () => {
+export const Doctors = ({ cancel }) => {
   const { Doctorcategory, Doctordata, setDoctordata } = useContext(AppContext);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const Doctors = () => {
             className="flex flex-col  items-center rounded-lg  mt-3 border border-slate-200"
           >
             <Link to={`/allDoctors/${data._id}`}>
-              <DoctorCard data={data} />
+              <DoctorCard data={data} cancel={cancel} />
             </Link>
           </div>
         ))}

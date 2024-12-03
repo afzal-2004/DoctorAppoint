@@ -3,14 +3,13 @@ import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Backend_Url } from "../../public/contstant";
-// import { FaCircleExclamation } from "react-icons/fa6";
+
 export const MyAppointments = () => {
-  const [Cancel, setCancel] = useState(false);
+  const [Cancel, setCancel] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const { Time, Date, token, setTime, setDate } = useContext(AppContext);
 
   const [Appointedid, setAppointedid] = useState([]);
-  // console.log(Appointedid);
   const [AppointedDoc, setAppointedDoc] = useState([]);
 
   useEffect(() => {
@@ -19,8 +18,6 @@ export const MyAppointments = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((e) => {
-        // e.preventDefault();
-
         setAppointedid(e.data.Doctor);
         setTime(e.data.appointedTime);
         setDate(e.data.Date);
@@ -93,11 +90,6 @@ export const MyAppointments = () => {
             </div>
           </div>
         ))}
-        {/* <span className="text-[15px] text-red-500 flex items-center gap-1">
-          {" "}
-          <FaCircleExclamation />
-          Book One Appointment at a Single time
-        </span> */}
       </div>
 
       {Cancel && <CancelPopup setCancel={setCancel} />}
@@ -108,7 +100,7 @@ export const MyAppointments = () => {
 const CancelPopup = ({ setCancel }) => {
   return (
     <>
-      <div className=" bg-white  w-full  m-auto  sm:w-[300px]  absolute  top-[20%]  right-[40%] p-4 rounded-lg z-50 flex flex-col justify-center">
+      <div className=" bg-black  text-white  w-[80%]  m-auto  sm:w-[400px]  absolute  top-[50%]   right-[10%] sm:top-[20%]  sm:right-[40%] p-4  sm:p-10 rounded-lg z-50 flex flex-col justify-center  items-center ">
         <h1>Are you Sure !! Cancel Appointment</h1>
         <div>
           <button className=" bg-red-400 px-3 py-1 rounded-md m-4">Yes</button>

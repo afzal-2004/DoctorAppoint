@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaAddressBook } from "react-icons/fa";
-import { CiViewList } from "react-icons/ci";
+
 import { useState } from "react";
 import axios from "axios";
 import { Backend_Url } from "../../../public/contstant";
@@ -12,7 +12,7 @@ export const AdminSidebar = () => {
   return (
     <div
       className="   xl:min-h-[98vh] m-auto  border-black xl:border xl:border-r-2 border-l-0 border-b-0 border-t-0   p-1 
-        
+         absolute  
      sm:min-w-[20%] md:min-w-[20%]  cursor-pointer  sm:block"
     >
       <ul className="flex xl:flex-col flex-row gap-y-3  text-nowrap">
@@ -36,18 +36,6 @@ export const AdminSidebar = () => {
           >
             <FaAddressBook />
             Add doctor
-          </li>
-        </Link>
-
-        <Link to={"/adminLayout/allDoctorList"}>
-          <li
-            className={`flex items-center  p-2 gap-x-5 sm:text-[20px] flex-nowrap ${
-              navItem === "3" && "bg-blue-50"
-            }`}
-            onClick={() => setnavItem("3")}
-          >
-            <CiViewList />
-            All Doctor
           </li>
         </Link>
       </ul>

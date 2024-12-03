@@ -78,8 +78,8 @@ export const AdminLayout = () => {
       <div className="   border-black sm:border border-r-0 border-l-0 border-b-0 border-t-2  flex flex-col xl:flex-row ">
         <AdminSidebar />
         <div
-          className="bg-blue-50  m-auto mt-4 xl:mt-0  p-4 w-[100%]   
-        sm:min-w-[80%] md:min-w-[80%]  h-[98vh]    
+          className="bg-slate-100  m-auto mt-4 xl:mt-0  p-4 w-[100%]   
+        sm:max-w-[70%] md:max-w-[70%]  absolute   sm:left-[25%] md:min-w-[20%]    
    "
         >
           <Outlet />

@@ -174,10 +174,10 @@ export const AddDoctor = () => {
           </div>
           <button
             className="bg-red-500 p-2 border 
-          border-black rounded-lg"
+          border-black rounded-lg mt-5"
           >
             {" "}
-            Post Doctor
+            Add Doctor
           </button>
         </form>
       </div>

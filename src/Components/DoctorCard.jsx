@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 import { GoDotFill } from "react-icons/go";
-
-export const DoctorCard = ({ data }) => {
+import { MdDelete } from "react-icons/md";
+export const DoctorCard = ({ data, cancel }) => {
   return (
-    <div>
+    <div className=" relative">
+      {cancel && (
+        <MdDelete className=" text-black text-[25px] absolute right-3 top-2" />
+      )}
       <img
         src={data.avtar}
         alt=""
