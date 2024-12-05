@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
@@ -5,30 +6,31 @@ import axios from "axios";
 import { Backend_Url } from "../../public/contstant";
 
 export const MyAppointments = () => {
-  const [Cancel, setCancel] = useState(true);
+  const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
+  console.log("Status of my cancel Button", Cancel);
   const { Time, Date, token, setTime, setDate } = useContext(AppContext);
 
   const [Appointedid, setAppointedid] = useState([]);
   const [AppointedDoc, setAppointedDoc] = useState([]);
-
-  useEffect(() => {
+  // console.log("This is m current Doctor Appointed id ", Appointedid);
+  const AccesAppointedDoctor = () => {
     axios
       .get(`${Backend_Url}/AccessAppointedDoctor`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((e) => {
-        setAppointedid(e.data.Doctor);
-        setTime(e.data.appointedTime);
-        setDate(e.data.Date);
+        if (e.data) {
+          setAppointedid(e.data.Doctor);
+          setTime(e.data.appointedTime);
+          setDate(e.data.Date);
+        }
       })
       .catch((e) => {
         console.log(e);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Appointedid]);
-
-  useEffect(() => {
+  };
+  const getAppointedDoctorlist = () => {
     axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
       const Doctordata = res.data;
       const Doctors = Doctordata?.filter((doc) =>
@@ -36,7 +38,13 @@ export const MyAppointments = () => {
       );
       setAppointedDoc(Doctors);
     });
-  }, [Appointedid]);
+  };
+
+  useEffect(() => {
+    AccesAppointedDoctor();
+    getAppointedDoctorlist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Appointedid, Cancel]);
 
   return (
     <>
@@ -92,18 +100,46 @@ export const MyAppointments = () => {
         ))}
       </div>
 
-      {Cancel && <CancelPopup setCancel={setCancel} />}
+      {Cancel && (
+        <CancelPopup
+          setCancel={setCancel}
+          Cancel={Cancel}
+          Appointedid={Appointedid}
+          token={token}
+        />
+      )}
     </>
   );
 };
 
-const CancelPopup = ({ setCancel }) => {
+const CancelPopup = ({ setCancel, Appointedid, token }) => {
+  const deleteteAppointedDoctor = (id) => {
+    axios
+      .delete(`${Backend_Url}/DeletedAppointedDoctor/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((e) => {
+        console.log(e);
+        setCancel(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <>
       <div className=" bg-black  text-white  w-[80%]  m-auto  sm:w-[400px]  absolute  top-[50%]   right-[10%] sm:top-[20%]  sm:right-[40%] p-4  sm:p-10 rounded-lg z-50 flex flex-col justify-center  items-center ">
         <h1>Are you Sure !! Cancel Appointment</h1>
         <div>
-          <button className=" bg-red-400 px-3 py-1 rounded-md m-4">Yes</button>
+          <button
+            className=" bg-red-400 px-3 py-1 rounded-md m-4"
+            onClick={() => {
+              deleteteAppointedDoctor(Appointedid);
+            }}
+          >
+            Yes
+          </button>
           <button
             className=" bg-green-400 px-3 py-1 rounded-md"
             onClick={() => {
