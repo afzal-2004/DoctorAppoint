@@ -4,16 +4,17 @@ import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Backend_Url } from "../../public/contstant";
-
+import { toast } from "react-toastify";
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  console.log("Status of my cancel Button", Cancel);
+
   const { Time, Date, token, setTime, setDate } = useContext(AppContext);
 
   const [Appointedid, setAppointedid] = useState([]);
   const [AppointedDoc, setAppointedDoc] = useState([]);
-  // console.log("This is m current Doctor Appointed id ", Appointedid);
+  console.log("This is m current Doctor Appointed id ", Appointedid);
+  console.log("This is My Current Appointed dpoctor", AppointedDoc.length);
   const AccesAppointedDoctor = () => {
     axios
       .get(`${Backend_Url}/AccessAppointedDoctor`, {
@@ -49,55 +50,62 @@ export const MyAppointments = () => {
   return (
     <>
       <div className={` mt-[8vh]  ${Cancel && " relative "}`}>
-        <h1 className=" text-[25px] font-bold text-center">My appointments </h1>
-        {AppointedDoc.map((doctor, i) => (
-          <div key={i} className="   sm:flex">
-            <div className="  mt-[3vh] sm:m-[3vh]  sm:flex  gap-3 border   w-full  border-slate-400 p-2 rounded-md">
-              <img
-                src={`${doctor.avtar}`}
-                alt="Doctorimage"
-                className="   object-cover  bg-blue-500 sm:max-w-[200px]   rounded-xl p-0  "
-              />
+        {AppointedDoc.length === 0 ? (
+          <h1 className=" text-[25px] font-bold text-center">
+            No Doctor Appointed{" "}
+          </h1>
+        ) : (
+          <>
+            {AppointedDoc.map((doctor, i) => (
+              <div key={i} className="   sm:flex">
+                <div className="  mt-[3vh] sm:m-[3vh]  sm:flex  gap-3 border   w-full  border-slate-400 p-2 rounded-md">
+                  <img
+                    src={`${doctor.avtar}`}
+                    alt="Doctorimage"
+                    className="   object-cover  bg-blue-500 sm:max-w-[200px]   rounded-xl p-0  "
+                  />
 
-              <div className="  sm:flex justify-between   w-full">
-                <div className=" mt-[5vh] sm:mt-[0vh]">
-                  <h1 className=" text-[20px] font-semibold text-red-500">
-                    {doctor.name}
-                  </h1>
-                  <span className=" text-[17px] font-light">
-                    {doctor.speciality}
-                  </span>
-                  <p className=" text-[15px] font-bold">Address :</p>
-                  <p className=" text-[18px font-semibold]">
-                    <span>{doctor.address?.line1}</span>
-                    <span>{doctor.address?.line2}</span>
-                  </p>
+                  <div className="  sm:flex justify-between   w-full">
+                    <div className=" mt-[5vh] sm:mt-[0vh]">
+                      <h1 className=" text-[20px] font-semibold text-red-500">
+                        {doctor.name}
+                      </h1>
+                      <span className=" text-[17px] font-light">
+                        {doctor.speciality}
+                      </span>
+                      <p className=" text-[15px] font-bold">Address :</p>
+                      <p className=" text-[18px font-semibold]">
+                        <span>{doctor.address?.line1}</span>
+                        <span>{doctor.address?.line2}</span>
+                      </p>
 
-                  <p>Date & Time</p>
-                  <span>{Date}</span>
+                      <p>Date & Time</p>
+                      <span>{Date}</span>
 
-                  <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span>
+                      <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span>
 
-                  <p>Fees:</p>
-                  <span>{doctor.doctorFees}rs</span>
-                </div>
-                <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
-                  <button
-                    className=" border border-slate-500 px-3 py-2 w-[150px]"
-                    onClick={() => {
-                      setCancel(!Cancel);
-                    }}
-                  >
-                    Cancel
-                  </button>
-                  <button className=" border border-slate-500 px-3 py-2 w-[150px] bg-blue-500 text-white ">
-                    Pay Here ..
-                  </button>
+                      <p>Fees:</p>
+                      <span>{doctor.doctorFees}rs</span>
+                    </div>
+                    <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
+                      <button
+                        className=" border border-slate-500 px-3 py-2 w-[150px]"
+                        onClick={() => {
+                          setCancel(!Cancel);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button className=" border border-slate-500 px-3 py-2 w-[150px] bg-blue-500 text-white ">
+                        Pay Here ..
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))}
+          </>
+        )}
       </div>
 
       {Cancel && (
@@ -106,13 +114,15 @@ export const MyAppointments = () => {
           Cancel={Cancel}
           Appointedid={Appointedid}
           token={token}
+          setAppointedid={setAppointedid}
+          setAppointedDoc={setAppointedDoc}
         />
       )}
     </>
   );
 };
 
-const CancelPopup = ({ setCancel, Appointedid, token }) => {
+const CancelPopup = ({ setCancel, Appointedid, token, setAppointedid }) => {
   const deleteteAppointedDoctor = (id) => {
     axios
       .delete(`${Backend_Url}/DeletedAppointedDoctor/${id}`, {
@@ -121,6 +131,12 @@ const CancelPopup = ({ setCancel, Appointedid, token }) => {
       .then((e) => {
         console.log(e);
         setCancel(false);
+        setAppointedid([]);
+        if (e.status === 201) {
+          toast.success(`${e.data.message}`, {
+            autoClose: 2000,
+          });
+        }
       })
       .catch((e) => {
         console.log(e);

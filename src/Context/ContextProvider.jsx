@@ -25,7 +25,6 @@ export const ContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    // Check for token in cookies on component mount
     if (token) {
       ProfileData();
     }

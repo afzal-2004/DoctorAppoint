@@ -15,7 +15,7 @@ export const AdminSidebar = () => {
          absolute  
      sm:min-w-[20%] md:min-w-[20%]  cursor-pointer  sm:block"
     >
-      <ul className="flex xl:flex-col flex-row gap-y-3  text-nowrap">
+      <ul className="flex sm:flex-col flex-row gap-y-3  text-nowrap">
         <Link to={"/adminLayout"}>
           <li
             className={`flex items-center  gap-x-5 p-2 w-full  sm:text-[20px] flex-nowrap ${

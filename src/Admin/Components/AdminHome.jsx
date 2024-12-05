@@ -62,7 +62,7 @@ export const AdminHome = () => {
     {
       image: "🤷‍♂️",
       Active: User,
-      text: "User",
+      text: " Active User",
     },
   ];
 

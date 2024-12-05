@@ -4,11 +4,12 @@ import { CgProfile } from "react-icons/cg";
 import axios from "axios";
 import { Backend_Url } from "../../../public/contstant";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 export const AddDoctor = () => {
   const AdminToken = Cookies.get("token");
 
   const [avtar, setavtar] = useState(null);
-  console.log(" This is My file ", File);
+
   const [about, setabout] = useState("Hii This is Afzal An Talak Specilist");
   const [Data, setData] = useState({
     name: "",
@@ -42,6 +43,7 @@ export const AddDoctor = () => {
     Formdata.append("appointmentTime", Data.appointmentTime);
     Formdata.append("addresss", Data.addresss);
     Formdata.append("about", about);
+    console.log("This is My form data Send To The backend Side is ", Formdata);
 
     axios
       .post(`${Backend_Url}/addNewDoctor`, Formdata, {
@@ -49,19 +51,25 @@ export const AddDoctor = () => {
       })
       .then((e) => {
         console.log(e);
-
-        setData({
-          name: "",
-          speciality: "",
-          email: "",
-          doctorFees: "",
-          experience: "",
-          degree: "",
-          appointmentTime: "",
-          addresss: "  ",
-        });
-        setabout("");
-        setavtar(null);
+        if (e.status === 201) {
+          toast.success(`${e.data.message}`, {
+            autoClose: 2000,
+          });
+        }
+        setTimeout(() => {
+          setData({
+            name: "",
+            speciality: "",
+            email: "",
+            doctorFees: "",
+            experience: "",
+            degree: "",
+            appointmentTime: "",
+            addresss: "",
+          });
+          setabout("");
+          setavtar(null);
+        }, 1000);
       })
       .catch((e) => {
         console.log(e);
@@ -109,8 +117,8 @@ export const AddDoctor = () => {
                 labelField={"Speciality"}
                 placeholder={"Speciality"}
                 event={handleChange}
-                name="Speciality"
-                value={Data.email}
+                name="speciality"
+                value={Data.speciality}
               />
             </div>
             <DoctorInput
@@ -135,14 +143,13 @@ export const AddDoctor = () => {
               value={Data.addresss}
             />
 
-            <div className=" flex flex-col justify-between gap-x-3 m-2">
-              <label htmlFor="Doctor Name">Expirence</label>
-              <input
-                type="text"
-                placeholder="Name"
-                className=" border border-black  outline-none p-2 m-2 rounded-md sm:text-[18px] text-[16px] text-black"
-              />
-            </div>
+            <DoctorInput
+              labelField={"Expirence"}
+              placeholder={"Expirence"}
+              event={handleChange}
+              name="experience"
+              value={Data.experience}
+            />
 
             <DoctorInput
               labelField={"Fess"}
