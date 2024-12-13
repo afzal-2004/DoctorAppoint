@@ -12,14 +12,14 @@ export const AddDoctor = () => {
 
   const [about, setabout] = useState("Hii This is Afzal An Talak Specilist");
   const [Data, setData] = useState({
-    name: "",
-    speciality: "",
-    email: "",
-    doctorFees: "",
-    experience: "",
-    degree: "",
-    appointmentTime: "",
-    addresss: "",
+    name: "Afzal",
+    speciality: "Talak Specilist",
+    email: "moa44567@gmail.com",
+    doctorFees: "14",
+    experience: "14",
+    degree: "MBBS ,MD B.tech ",
+    appointmentTime: "13:00,14:00",
+    addresss: "jasvant nagr up jan",
   });
   const handleFileChange = (e) => {
     setavtar(e.target.files[0]);
