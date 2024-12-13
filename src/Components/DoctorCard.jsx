@@ -24,7 +24,7 @@ export const DoctorCard = ({ data, cancel, Doctorid }) => {
       });
   };
   return (
-    <div className=" relative">
+    <div className="relative">
       {cancel && (
         <MdDelete
           className=" text-black text-[25px] absolute right-3 top-2"
