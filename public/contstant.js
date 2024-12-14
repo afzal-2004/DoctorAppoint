@@ -1,1 +1,1 @@
-export const Backend_Url = "http://localhost:3000/care";
+export const Backend_Url = "https://carebridgebackend.onrender.com/care";
