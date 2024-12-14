@@ -10,16 +10,16 @@ export const AddDoctor = () => {
 
   const [avtar, setavtar] = useState(null);
 
-  const [about, setabout] = useState("Hii This is Afzal An Talak Specilist");
+  const [about, setabout] = useState("");
   const [Data, setData] = useState({
-    name: "Afzal",
-    speciality: "Talak Specilist",
-    email: "moa44567@gmail.com",
-    doctorFees: "14",
-    experience: "14",
-    degree: "MBBS ,MD B.tech ",
-    appointmentTime: "13:00,14:00",
-    addresss: "jasvant nagr up jan",
+    name: "",
+    speciality: "",
+    email: "",
+    doctorFees: "",
+    experience: "",
+    degree: " ",
+    appointmentTime: "",
+    addresss: "",
   });
   const handleFileChange = (e) => {
     setavtar(e.target.files[0]);
@@ -43,7 +43,7 @@ export const AddDoctor = () => {
     Formdata.append("appointmentTime", Data.appointmentTime);
     Formdata.append("addresss", Data.addresss);
     Formdata.append("about", about);
-    console.log("This is My form data Send To The backend Side is ", Formdata);
+    // console.log("This is My form data Send To The backend Side is ", Formdata);
 
     axios
       .post(`${Backend_Url}/addNewDoctor`, Formdata, {

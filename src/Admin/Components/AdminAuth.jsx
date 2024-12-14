@@ -7,8 +7,10 @@ import Cookies from "js-cookie";
 export const AdminAuth = () => {
   const navigate = useNavigate();
   const [Data, setData] = useState({
-    emailOrMobile: "admin@gmail.com",
-    Password: "123",
+    emailOrMobile: "",
+    // admin@gmail.com
+    Password: "",
+    // 123
   });
   const handlechange = (e) => {
     e.preventDefault();
