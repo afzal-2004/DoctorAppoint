@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { UserProfile } from "./UserProfile";
 import { AppContext } from "../Context/AppContext";
-
+import "./Components.css";
 export const Navbar = () => {
   const { token, setOpenNav, Opennav } = useContext(AppContext);
 
@@ -39,19 +39,29 @@ export const Navbar = () => {
           className={`uppercase gap-3  sm:relative   hidden   sm:flex  sm:text-[14px] `}
         >
           <li>
-            <NavLink to={"/"}>Home</NavLink>
+            <NavLink to={"/"} className="nav-item">
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/allDoctors"}>All Doctors</NavLink>
+            <NavLink to={"/allDoctors"} className="nav-item">
+              All Doctors
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/about"}>About</NavLink>
+            <NavLink to={"/about"} className="nav-item">
+              About
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/contact"}>Contact</NavLink>
+            <NavLink to={"/contact"} className="nav-item">
+              Contact
+            </NavLink>
           </li>
           <li className="text-[12px] border border-blue-200 rounded-xl px-2 py-1 ">
-            <NavLink to={"/admin"}>Admin</NavLink>
+            <NavLink to={"/admin"} className="nav-item">
+              Admin
+            </NavLink>
           </li>
         </ul>
 
@@ -78,16 +88,24 @@ export const Navbar = () => {
           <div className=" sm:hidden flex absolute top-[60px]  flex-col  bg-slate-300  w-[50vw]  h-[300px] right-0   justify-between z-50  ">
             <ul className={`uppercase gap-y-5 p-4 `}>
               <li className="p-2" onClick={handleNav}>
-                <NavLink to={"/"}>Home</NavLink>
+                <NavLink to={"/"} className="nav-item">
+                  Home
+                </NavLink>
               </li>
               <li className="p-2" onClick={handleNav}>
-                <NavLink to={"/allDoctors"}>All Doctors</NavLink>
+                <NavLink to={"/allDoctors"} className="nav-item">
+                  All Doctors
+                </NavLink>
               </li>
               <li className="p-2" onClick={handleNav}>
-                <NavLink to={"/about"}>About</NavLink>
+                <NavLink to={"/about"} className="nav-item">
+                  About
+                </NavLink>
               </li>
               <li className="p-2" onClick={handleNav}>
-                <NavLink to={"/Contact"}>Contact</NavLink>
+                <NavLink to={"/Contact"} className="nav-item">
+                  Contact
+                </NavLink>
               </li>
             </ul>
             <div className="  sm:flex">

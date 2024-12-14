@@ -1,24 +1,30 @@
-.EditformContainer {
+.nav-item {
+  color: black;
+}
+.nav-item:active {
+  @apply text-slate-400;
+}
 
-    @apply bg-slate-100 absolute top-0 ml-[5%] w-[90%] md:w-[50%] xl:w-[40%] md:ml-[25%] xl:ml-[30%] p-2 rounded-lg
+.EditformContainer {
+  @apply bg-slate-100 absolute top-0 ml-[5%] w-[90%] md:w-[50%] xl:w-[40%] md:ml-[25%] xl:ml-[30%] p-2 rounded-lg;
 }
 
 .EditForminput {
-    @apply w-full sm:w-[400px] p-2 bg-slate-100 border-black outline-none border-2 border-l-0 border-r-0 border-t-0;
+  @apply w-full sm:w-[400px] p-2 bg-slate-100 border-black outline-none border-2 border-l-0 border-r-0 border-t-0;
 }
 
 .loginForminput {
-    @apply w-full px-3 py-2 border rounded-md
+  @apply w-full px-3 py-2 border rounded-md;
 }
 
 .RegisterandLoginBtn {
-    @apply w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200
+  @apply w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200;
 }
 
 .Patientdetailsforminput {
-    @apply mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
+  @apply mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
 }
 
 .profiledetails {
-    @apply p-2 font-semibold grid grid-cols-5 border border-r-0 border-t-0 border-l-0;
+  @apply p-2 font-semibold grid grid-cols-5 border border-r-0 border-t-0 border-l-0;
 }

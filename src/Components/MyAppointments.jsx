@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Backend_Url } from "../../public/contstant";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
@@ -12,9 +13,17 @@ export const MyAppointments = () => {
   const { Time, Date, token, setTime, setDate } = useContext(AppContext);
 
   const [Appointedid, setAppointedid] = useState([]);
+  // console.log("This is My Appointed Doctors id ", Appointedid?.[0]?.Doctor);
+  const [Currentid, setCurrentid] = useState([]);
+  // console.log("Thevalue of First is ", first);
+
+  // console.log(" This is My allAppointed Doctor id", Appointedid);
   const [AppointedDoc, setAppointedDoc] = useState([]);
-  console.log("This is m current Doctor Appointed id ", Appointedid);
-  console.log("This is My Current Appointed dpoctor", AppointedDoc.length);
+  // const AppointedDoc = useRef([]);
+  // console.log(AppointedDoc);
+  // console.log(AppointedDoc?.[0]);
+  // console.log("This is m current Doctor Appointed id ", Appointedid);
+  // console.log("This is My Current Appointed dpoctor", AppointedDoc.length);
   const AccesAppointedDoctor = () => {
     axios
       .get(`${Backend_Url}/AccessAppointedDoctor`, {
@@ -22,7 +31,8 @@ export const MyAppointments = () => {
       })
       .then((e) => {
         if (e.data) {
-          setAppointedid(e.data.Doctor);
+          // console.log(e.data);
+          setAppointedid(e.data);
           setTime(e.data.appointedTime);
           setDate(e.data.Date);
         }
@@ -31,14 +41,23 @@ export const MyAppointments = () => {
         console.log(e);
       });
   };
+
   const getAppointedDoctorlist = () => {
-    axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
-      const Doctordata = res.data;
-      const Doctors = Doctordata?.filter((doc) =>
-        Appointedid.includes(doc._id)
-      );
-      setAppointedDoc(Doctors);
-    });
+    for (let i = 0; i < Appointedid.length; i++) {
+      axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
+        const Doctordata = res.data;
+        // const Doctors = Doctordata?.filter((doc) =>
+        //   Appointedid?.[0]?.Doctor.includes(doc._id)
+        // );
+        const Doctors = Doctordata?.filter((doc) =>
+          Appointedid.some((appointment) =>
+            appointment?.Doctor.includes(doc._id)
+          )
+        );
+        setAppointedDoc(Doctors);
+        // AppointedDoc.push(Doctors);
+      });
+    }
   };
 
   useEffect(() => {
@@ -92,6 +111,7 @@ export const MyAppointments = () => {
                         className=" border border-slate-500 px-3 py-2 w-[150px]"
                         onClick={() => {
                           setCancel(!Cancel);
+                          setCurrentid(doctor._id);
                         }}
                       >
                         Cancel
@@ -112,9 +132,9 @@ export const MyAppointments = () => {
         <CancelPopup
           setCancel={setCancel}
           Cancel={Cancel}
-          Appointedid={Appointedid}
+          Appointedid={Currentid}
           token={token}
-          setAppointedid={setAppointedid}
+          setAppointedid={setCurrentid}
           setAppointedDoc={setAppointedDoc}
         />
       )}
