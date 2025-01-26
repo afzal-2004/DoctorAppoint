@@ -28,3 +28,16 @@
 .profiledetails {
   @apply p-2 font-semibold grid grid-cols-5 border border-r-0 border-t-0 border-l-0;
 }
+.loader {
+  @apply h-[100px] w-[100px] border-2 border-l-2 border-l-slate-700 border-t-slate-700 rounded-full;
+  animation: loader 700ms linear infinite;
+}
+@keyframes loader {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}

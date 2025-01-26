@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import axios from "axios";
 import { AppContext } from "../../Context/AppContext";
 import { Backend_Url } from "../../../public/contstant";
+import Loader from "../../Components/Loader";
 export const Doctors = ({ cancel }) => {
   const { Doctorcategory, Doctordata, setDoctordata } = useContext(AppContext);
 
@@ -29,6 +30,7 @@ export const Doctors = ({ cancel }) => {
   return (
     <>
       <main className="  gap-4 grid   grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 sm:gap-6   p-10   justify-center">
+        {Doctordata.length === 0 ? <Loader /> : ""}
         {Doctordata.map((data, i) => (
           <div
             key={i}

@@ -64,68 +64,69 @@ export const MyAppointments = () => {
     AccesAppointedDoctor();
     getAppointedDoctorlist();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Appointedid, Cancel]);
+  }, [Appointedid, Currentid, Cancel]);
 
   return (
     <>
       <div className={` mt-[8vh]  ${Cancel && " relative "}`}>
-        {AppointedDoc.length === 0 ? (
+        {/* {AppointedDoc.length === 0 ? (
           <h1 className=" text-[25px] font-bold text-center">
             No Doctor Appointed{" "}
           </h1>
         ) : (
-          <>
-            {AppointedDoc.map((doctor, i) => (
-              <div key={i} className="   sm:flex">
-                <div className="  mt-[3vh] sm:m-[3vh]  sm:flex  gap-3 border   w-full  border-slate-400 p-2 rounded-md">
-                  <img
-                    src={`${doctor.avtar}`}
-                    alt="Doctorimage"
-                    className="   object-cover  bg-blue-500 sm:max-w-[200px]   rounded-xl p-0  "
-                  />
+          
+        )} */}
+        <>
+          {AppointedDoc.map((doctor, i) => (
+            <div key={i} className="   sm:flex">
+              <div className="  mt-[3vh] sm:m-[3vh]  sm:flex  gap-3 border   w-full  border-slate-400 p-2 rounded-md">
+                <img
+                  src={`${doctor.avtar}`}
+                  alt="Doctorimage"
+                  className="   object-cover  bg-blue-500 sm:max-w-[200px]   rounded-xl p-0  "
+                />
 
-                  <div className="  sm:flex justify-between   w-full">
-                    <div className=" mt-[5vh] sm:mt-[0vh]">
-                      <h1 className=" text-[20px] font-semibold text-red-500">
-                        {doctor.name}
-                      </h1>
-                      <span className=" text-[17px] font-light">
-                        {doctor.speciality}
-                      </span>
-                      <p className=" text-[15px] font-bold">Address :</p>
-                      <p className=" text-[18px font-semibold]">
-                        <span>{doctor.address?.line1}</span>
-                        <span>{doctor.address?.line2}</span>
-                      </p>
+                <div className="  sm:flex justify-between   w-full">
+                  <div className=" mt-[5vh] sm:mt-[0vh]">
+                    <h1 className=" text-[20px] font-semibold text-red-500">
+                      {doctor.name}
+                    </h1>
+                    <span className=" text-[17px] font-light">
+                      {doctor.speciality}
+                    </span>
+                    <p className=" text-[15px] font-bold">Address :</p>
+                    <p className=" text-[18px font-semibold]">
+                      <span>{doctor.address?.line1}</span>
+                      <span>{doctor.address?.line2}</span>
+                    </p>
 
-                      <p>Date & Time</p>
-                      <span>{Date}</span>
+                    <p>Date & Time</p>
+                    <span>{Date}</span>
 
-                      <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span>
+                    <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span>
 
-                      <p>Fees:</p>
-                      <span>{doctor.doctorFees}rs</span>
-                    </div>
-                    <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
-                      <button
-                        className=" border border-slate-500 px-3 py-2 w-[150px]"
-                        onClick={() => {
-                          setCancel(!Cancel);
-                          setCurrentid(doctor._id);
-                        }}
-                      >
-                        Cancel
-                      </button>
-                      <button className=" border border-slate-500 px-3 py-2 w-[150px] bg-blue-500 text-white ">
-                        Pay Here ..
-                      </button>
-                    </div>
+                    <p>Fees:</p>
+                    <span>{doctor.doctorFees}rs</span>
+                  </div>
+                  <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
+                    <button
+                      className=" border border-slate-500 px-3 py-2 w-[150px]"
+                      onClick={() => {
+                        setCancel(!Cancel);
+                        setCurrentid(doctor._id);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                    <button className=" border border-slate-500 px-3 py-2 w-[150px] bg-blue-500 text-white ">
+                      Pay Here ..
+                    </button>
                   </div>
                 </div>
               </div>
-            ))}
-          </>
-        )}
+            </div>
+          ))}
+        </>
       </div>
 
       {Cancel && (
