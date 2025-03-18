@@ -1,31 +1,12 @@
 /* eslint-disable react/prop-types */
 import { DoctorCard } from "../../Components/DoctorCard";
-import { useContext, useEffect } from "react";
-import axios from "axios";
+import { useContext } from "react";
+
 import { AppContext } from "../../Context/AppContext";
-import { Backend_Url } from "../../../public/contstant";
+
 import Loader from "../../Components/Loader";
 export const Doctors = ({ cancel }) => {
-  const { Doctorcategory, Doctordata, setDoctordata } = useContext(AppContext);
-
-  useEffect(() => {
-    if (Doctorcategory === "All") {
-      axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
-        setDoctordata(res.data);
-      });
-    } else {
-      axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
-        const Doctors = res.data;
-
-        const filterd = Doctors.filter((item) =>
-          item.speciality.toLowerCase().includes(Doctorcategory.toLowerCase())
-        );
-
-        setDoctordata(filterd);
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Doctorcategory]);
+  const { Doctordata } = useContext(AppContext);
 
   return (
     <>

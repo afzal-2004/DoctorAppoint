@@ -1,21 +1,15 @@
 import Hedaderimage from "../../assets/frontend/header_img.png";
 import Footerimage from "../../assets/frontend/appointment_img.png";
-
+import { useContext } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { specialityData } from "../../assets/frontend/assets";
 import { Link } from "react-router-dom";
 import { DoctorCard } from "../../Components/DoctorCard";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Backend_Url } from "../../../public/contstant";
+
 import Loader from "../../Components/Loader";
+import { AppContext } from "../../Context/AppContext";
 export const Home = () => {
-  const [Doctorsdata, setDoctorsdata] = useState([]);
-  useEffect(() => {
-    axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
-      setDoctorsdata(res.data);
-    });
-  }, []);
+  const { Doctordata } = useContext(AppContext);
   return (
     <div>
       <main>
@@ -77,11 +71,11 @@ export const Home = () => {
             Simply browse through our extensive list of trusted doctors.
           </p>
           <main className="  gap-4 grid   grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 sm:gap-6   p-10   justify-center ">
-            {Doctorsdata.length === 0 ? (
+            {Doctordata.length === 0 ? (
               <Loader />
             ) : (
               <>
-                {Doctorsdata.map((data, i) => (
+                {Doctordata.map((data, i) => (
                   <div
                     key={i}
                     className={`flex flex-col  items-center rounded-lg  mt-3 border border-slate-200 ${

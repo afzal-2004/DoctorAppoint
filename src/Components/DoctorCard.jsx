@@ -4,39 +4,17 @@ import { Link } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
-import { Backend_Url } from "../../public/contstant";
 import { toast } from "react-toastify";
 export const DoctorCard = ({ data, cancel, Doctorid }) => {
-  const DeletedDoctor = (id) => {
-    // console.log(" This is Id ", id);
-    axios
-      .delete(`${Backend_Url}/deleteDoctor/${id}`)
-      .then((e) => {
-        console.log(e);
-        if (e.status === 201) {
-          toast.success(`${e.data.message}`, {
-            autoClose: 2000,
-          });
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
   return (
     <div className="relative">
       {cancel && (
-        <MdDelete
-          className=" text-black text-[25px] absolute right-3 top-2"
-          onClick={() => {
-            DeletedDoctor(Doctorid);
-          }}
-        />
+        <MdDelete className=" text-black text-[25px] absolute right-3 top-2" />
       )}
 
       <Link to={`/allDoctors/${data._id}`}>
         <img
-          src={data.avtar}
+          src={data.image}
           alt=""
           className=" bg-blue-50  hover:bg-blue-500 rounded-lg  "
         />
