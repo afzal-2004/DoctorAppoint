@@ -6,7 +6,7 @@ import { UserProfile } from "./UserProfile";
 import { AppContext } from "../Context/AppContext";
 import "./Components.css";
 export const Navbar = () => {
-  const { token, setOpenNav, Opennav } = useContext(AppContext);
+  const { setOpenNav, Opennav, login } = useContext(AppContext);
 
   const handleNav = () => {
     setOpenNav(!Opennav);
@@ -58,15 +58,10 @@ export const Navbar = () => {
               Contact
             </NavLink>
           </li>
-          <li className="text-[12px] border border-blue-200 rounded-xl px-2 py-1 ">
-            <NavLink to={"/admin"} className="nav-item">
-              Admin
-            </NavLink>
-          </li>
         </ul>
 
         <div className=" hidden sm:flex">
-          {token ? (
+          {login ? (
             <div
               className={`  hidden  text-white  rounded-[30px] sm:relative    sm:flex `}
             >
@@ -109,7 +104,7 @@ export const Navbar = () => {
               </li>
             </ul>
             <div className="  sm:flex">
-              {token ? (
+              {login ? (
                 <div
                   className={`    text-white  rounded-[30px] sm:relative     `}
                 >

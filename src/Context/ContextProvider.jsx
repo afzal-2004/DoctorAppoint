@@ -11,23 +11,13 @@ export const ContextProvider = ({ children }) => {
   const [Time, setTime] = useState(0);
   const [Date, setDate] = useState("");
   const [Doctorcategory, setDoctorcategory] = useState("All");
-  console.log("This is My Current Doctor category ", Doctorcategory);
   const [Profile, setProfile] = useState([]);
   const [Doctordata, setDoctordata] = useState([]);
-
-  // useEffect(() => {
-  //   setDoctorcategory("");
-  // }, []);
-
+  const [login, setlogin] = useState(false);
   useEffect(() => {
     axios.get(`/Doctor.json`).then((e) => {
-      // console.log(e.data);
       setDoctordata(e.data);
     });
-  }, []);
-
-  useEffect(() => {
-    setDoctorcategory("");
   }, []);
 
   const value = {
@@ -45,6 +35,8 @@ export const ContextProvider = ({ children }) => {
     setDoctorcategory,
     Doctordata,
     setDoctordata,
+    login,
+    setlogin,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

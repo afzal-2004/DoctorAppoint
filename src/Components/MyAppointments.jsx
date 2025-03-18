@@ -15,15 +15,9 @@ export const MyAppointments = () => {
   const [Appointedid, setAppointedid] = useState([]);
   // console.log("This is My Appointed Doctors id ", Appointedid?.[0]?.Doctor);
   const [Currentid, setCurrentid] = useState([]);
-  // console.log("Thevalue of First is ", first);
 
-  // console.log(" This is My allAppointed Doctor id", Appointedid);
   const [AppointedDoc, setAppointedDoc] = useState([]);
-  // const AppointedDoc = useRef([]);
-  // console.log(AppointedDoc);
-  // console.log(AppointedDoc?.[0]);
-  // console.log("This is m current Doctor Appointed id ", Appointedid);
-  // console.log("This is My Current Appointed dpoctor", AppointedDoc.length);
+
   const AccesAppointedDoctor = () => {
     axios
       .get(`${Backend_Url}/AccessAppointedDoctor`, {

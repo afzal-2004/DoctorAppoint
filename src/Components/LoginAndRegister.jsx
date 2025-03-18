@@ -4,9 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import "./Components.css";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { Backend_Url } from "../../public/contstant.js";
+
 export const Register = () => {
   const navigate = useNavigate();
   const [Registerdata, setRegisterdata] = useState({
@@ -14,38 +12,23 @@ export const Register = () => {
     email: "",
     Mobilenumner: "",
     Password: "",
-    profilePicture: "",
-    Address: "",
-    Gender: "",
-    DOB: "",
   });
+  // console.log(Registerdata);
   const handelChange = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setRegisterdata({
       ...Registerdata,
       [e.target.name]: e.target.value,
     });
   };
   const handleData = (e) => {
-    console.log(e);
+    // console.log(e);
     e.preventDefault();
 
-    axios
-      .post(`${Backend_Url}/Register`, Registerdata)
-      .then(() => {
-        toast.success("Register SuccessFully", {
-          autoClose: 2000,
-        });
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
-      })
-      .catch((e) => {
-        console.log(e);
-        toast.error("Something Went Wrong ");
-      });
-
-    console.log(Registerdata);
+    toast.success("Register Sucessfully");
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
   };
 
   return (
@@ -128,8 +111,9 @@ export const Register = () => {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { data, setdata, setLogin, setProfile } = useContext(AppContext);
+  const { setlogin } = useContext(AppContext);
 
+  const [data, setdata] = useState([]);
   const handleChange = (e) => {
     e.preventDefault();
     setdata({
@@ -139,24 +123,12 @@ export const Login = () => {
   };
   const handleData = (e) => {
     e.preventDefault();
-    axios
-      .post(`${Backend_Url}/Login`, data)
-      .then((e) => {
-        handleChange;
 
-        const Token = e.data.token;
+    handleChange;
 
-        Cookies.set("token", Token, { expires: 1 });
-        console.log(e);
-        toast.success(`${e.data?.message}`);
-        setProfile(e.data.finduser);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   return (
@@ -173,7 +145,7 @@ export const Login = () => {
           </label>
           <input
             type="text"
-            value={data.emailOrMobile}
+            // value={data.emailOrMobile}
             name="emailOrMobile"
             onChange={handleChange}
             className="loginForminput"
@@ -188,7 +160,7 @@ export const Login = () => {
           <input
             type="password"
             name="Password"
-            value={data.Password}
+            // value={data.Password}
             className="loginForminput"
             onChange={handleChange}
             required
@@ -198,14 +170,13 @@ export const Login = () => {
         <button
           type="submit"
           className="RegisterandLoginBtn"
-          onClick={() => setLogin(true)}
+          onClick={() => setlogin(true)}
         >
           Login
         </button>
         <Link to="/register">
           <p className=" mt-3">
-            Not Have An Accont ?{" "}
-            <span className="text-blue-400">Regitster</span>
+            Not Have An Accont ? <span className="text-blue-400">Register</span>
           </p>
         </Link>
       </form>

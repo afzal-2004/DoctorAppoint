@@ -1,28 +1,26 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Profile_pic from "../assets/frontend/profile_pic.png";
 
 import { AppContext } from "../Context/AppContext";
 import { FaChevronLeft } from "react-icons/fa";
 import "./Components.css";
 
-import axios from "axios";
-import { toast } from "react-toastify";
-import { Backend_Url } from "../../public/contstant";
-import Cookies from "js-cookie";
-export const UserProfile = () => {
-  const { Profile, setOpenNav, token } = useContext(AppContext);
+// import { toast } from "react-toastify";
 
+export const UserProfile = () => {
+  const { Profile, setOpenNav, setlogin } = useContext(AppContext);
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
 
+  console.log("This is My Profile data ", Profile);
   const handelProfileNav = (OpenProfilenav) => {
     setOpenProfilenav(!OpenProfilenav);
   };
   return (
     <>
-      {token && (
+      {setlogin && (
         <div className=" sm:flex items-center gap-1 hidden ">
           {Profile.profilePicture ? (
             <img src={Profile_pic} alt="" className="w-[50px] rounded-full" />
@@ -59,28 +57,8 @@ export const UserProfile = () => {
   );
 };
 const ProfileSidebar = ({ handelProfileNav }) => {
-  const navigate = useNavigate();
-  const { setOpenNav, token, ProfileData } = useContext(AppContext);
+  const { setOpenNav } = useContext(AppContext);
 
-  const handleLogout = () => {
-    axios
-      .post(
-        `${Backend_Url}/Logout`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((e) => {
-        toast.success(`${e.data?.message}`);
-        Cookies.remove("token");
-        ProfileData();
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
-      })
-      .catch((e) => console.log(e));
-  };
   return (
     <>
       <div
@@ -108,7 +86,6 @@ const ProfileSidebar = ({ handelProfileNav }) => {
             <li
               className="p-1  hover:text-blue-500"
               onClick={() => {
-                handleLogout();
                 handelProfileNav();
               }}
             >

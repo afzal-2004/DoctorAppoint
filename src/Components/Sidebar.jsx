@@ -13,10 +13,10 @@ export const Sidebar = () => {
         <ul className="  min-w-[200px] gap-3 rounded-md">
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "" && "bg-blue-500 text-slate-100"
+              Doctorcategory === "All" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("");
+              setDoctorcategory("All");
             }}
           >
             All Doctor

@@ -10,7 +10,7 @@ export const Doctors = ({ cancel }) => {
   const { Doctordata, Doctorcategory } = useContext(AppContext);
   const [FilterData, setFilterData] = useState([]);
   useEffect(() => {
-    if (Doctorcategory !== "") {
+    if (Doctorcategory !== "All") {
       const filterData = Doctordata.filter(
         (Data) => Data.speciality.toLowerCase() === Doctorcategory.toLowerCase()
       );
@@ -20,7 +20,7 @@ export const Doctors = ({ cancel }) => {
     }
 
     // console.log("This is my filterd data", filterData);
-  }, [Doctorcategory]);
+  }, [Doctorcategory, Doctordata]);
 
   return (
     <>
