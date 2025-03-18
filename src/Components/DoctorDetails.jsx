@@ -18,12 +18,12 @@ export const DoctorDetails = () => {
     setTime,
     Date,
     setDate,
-    token,
-    addDoctorAppointment,
+    login,
   } = useContext(AppContext);
 
   const { id } = useParams();
-  console.log("This is The the id if seected Doctor ", id);
+  // console.log("This is The the id if seected Doctor ", id);
+  console.log("The value of login is ", login);
 
   useEffect(() => {
     axios.get(`/Doctor.json`).then((res) => {
@@ -118,9 +118,9 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                {!token || !Date ? (
+                {!login && !Date ? (
                   <button
-                    disabled={!token || !Date}
+                    disabled={!login || !Date}
                     className={`m-[5vh] border ${
                       !Date ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
                     } rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center`}
@@ -132,7 +132,7 @@ export const DoctorDetails = () => {
                   <Link to={"/Appointments"}>
                     <button
                       className="m-[5vh] border bg-blue-500 rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center"
-                      onClick={() => addDoctorAppointment(id)}
+                      // onClick={() => addDoctorAppointment(id)}
                     >
                       Book an appointment
                       <FaArrowRight />

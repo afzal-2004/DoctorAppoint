@@ -16,7 +16,7 @@ import { useContext } from "react";
 
 export const Index = () => {
   const { login } = useContext(AppContext);
-  console.log("The value of  login ", login);
+
   return (
     <>
       <BrowserRouter>
@@ -33,7 +33,10 @@ export const Index = () => {
               path="/userProfile"
               element={login ? <MyProfile /> : <Home />}
             />
-            <Route path="/Appointments" element={<MyAppointments />} />
+            <Route
+              path="/Appointments"
+              element={login ? <MyAppointments /> : <Home />}
+            />
             <Route path="/allDoctors" element={<DoctorOutlet />}>
               <Route path="/allDoctors" element={<Doctors />} />
             </Route>

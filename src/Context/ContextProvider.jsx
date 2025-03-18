@@ -12,7 +12,6 @@ export const ContextProvider = ({ children }) => {
   const [Date, setDate] = useState("");
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [Profile, setProfile] = useState([]);
-  console.log("This is My profile data", Profile);
   const [Doctordata, setDoctordata] = useState([]);
   const [login, setlogin] = useState(false);
   useEffect(() => {
