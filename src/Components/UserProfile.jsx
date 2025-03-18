@@ -13,8 +13,6 @@ import "./Components.css";
 export const UserProfile = () => {
   const { Profile, setOpenNav, setlogin } = useContext(AppContext);
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
-
-  console.log("This is My Profile data ", Profile);
   const handelProfileNav = (OpenProfilenav) => {
     setOpenProfilenav(!OpenProfilenav);
   };
@@ -56,6 +54,7 @@ export const UserProfile = () => {
     </>
   );
 };
+
 const ProfileSidebar = ({ handelProfileNav }) => {
   const { setOpenNav } = useContext(AppContext);
 
@@ -111,7 +110,7 @@ export const MyProfile = () => {
     },
     {
       title: "Contact",
-      property: Profile.MobileNumber,
+      property: Profile.Mobilenumer,
     },
   ];
 

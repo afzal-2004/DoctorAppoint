@@ -7,25 +7,25 @@ import "./Components.css";
 
 export const Register = () => {
   const navigate = useNavigate();
+  const { setProfile } = useContext(AppContext);
+
   const [Registerdata, setRegisterdata] = useState({
-    name: "",
-    email: "",
-    Mobilenumner: "",
-    Password: "",
+    name: "Afzal",
+    email: "moa44468@gmail.com",
+    Mobilenumer: "1234567890",
+    Password: "1234",
   });
-  // console.log(Registerdata);
   const handelChange = (e) => {
-    // e.preventDefault();
     setRegisterdata({
       ...Registerdata,
       [e.target.name]: e.target.value,
     });
   };
-  const handleData = (e) => {
-    // console.log(e);
-    e.preventDefault();
 
+  const handleData = (e) => {
+    e.preventDefault();
     toast.success("Register Sucessfully");
+    setProfile(Registerdata);
     setTimeout(() => {
       navigate("/login");
     }, 1000);
@@ -74,7 +74,7 @@ export const Register = () => {
           <input
             type="text"
             name="Mobilenumner"
-            value={Registerdata.Mobilenumner}
+            value={Registerdata.Mobilenumer}
             onChange={handelChange}
             className="loginForminput"
             required
@@ -113,7 +113,10 @@ export const Login = () => {
   const navigate = useNavigate();
   const { setlogin } = useContext(AppContext);
 
-  const [data, setdata] = useState([]);
+  const [data, setdata] = useState({
+    emailOrMobile: "moa4468@gmail.com",
+    Password: "1234",
+  });
   const handleChange = (e) => {
     e.preventDefault();
     setdata({
@@ -145,7 +148,7 @@ export const Login = () => {
           </label>
           <input
             type="text"
-            // value={data.emailOrMobile}
+            value={data.emailOrMobile}
             name="emailOrMobile"
             onChange={handleChange}
             className="loginForminput"
@@ -160,7 +163,7 @@ export const Login = () => {
           <input
             type="password"
             name="Password"
-            // value={data.Password}
+            value={data.Password}
             className="loginForminput"
             onChange={handleChange}
             required

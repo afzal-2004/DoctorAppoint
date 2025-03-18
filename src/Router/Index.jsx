@@ -8,17 +8,19 @@ import { Doctors } from "../Pages/Doctors/Doctors";
 import { Sidebar } from "../Components/Sidebar";
 import { Login, Register } from "../Components/LoginAndRegister";
 import { DoctorDetails } from "../Components/DoctorDetails";
-
+import { AppContext } from "../Context/AppContext";
 import { MyProfile } from "../Components/UserProfile";
 import { MyAppointments } from "../Components/MyAppointments";
+import { useContext } from "react";
 /* ALL ADMIN PABEL REALTED ROITES IS DEFINED HERE*/
 
 export const Index = () => {
+  const { login } = useContext(AppContext);
+  console.log("The value of  login ", login);
   return (
     <>
       <BrowserRouter>
         <Routes>
-          {/* This Route For My Main App */}
           <Route path="/" element={<MainAppLayoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -27,7 +29,10 @@ export const Index = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/allDoctors/:id" element={<DoctorDetails />} />
 
-            <Route path="/userProfile" element={<MyProfile />} />
+            <Route
+              path="/userProfile"
+              element={login ? <MyProfile /> : <Home />}
+            />
             <Route path="/Appointments" element={<MyAppointments />} />
             <Route path="/allDoctors" element={<DoctorOutlet />}>
               <Route path="/allDoctors" element={<Doctors />} />
