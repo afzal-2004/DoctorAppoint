@@ -11,22 +11,20 @@ export const ContextProvider = ({ children }) => {
   const [Time, setTime] = useState(0);
   const [Date, setDate] = useState("");
   const [Doctorcategory, setDoctorcategory] = useState("All");
+  console.log("This is My Current Doctor category ", Doctorcategory);
   const [Profile, setProfile] = useState([]);
   const [Doctordata, setDoctordata] = useState([]);
 
+  // useEffect(() => {
+  //   setDoctorcategory("");
+  // }, []);
+
   useEffect(() => {
-    axios.get(`/public/Doctor.json`).then((e) => {
-      console.log(e.data);
+    axios.get(`/Doctor.json`).then((e) => {
+      // console.log(e.data);
       setDoctordata(e.data);
     });
   }, []);
-
-  const [data, setdata] = useState({
-    emailOrMobile: "",
-    //moa44468@gmail.com
-    Password: "",
-    // 123456
-  });
 
   useEffect(() => {
     setDoctorcategory("");
@@ -41,8 +39,6 @@ export const ContextProvider = ({ children }) => {
     setTime,
     Date,
     setDate,
-    data,
-    setdata,
     Profile,
     setProfile,
     Doctorcategory,

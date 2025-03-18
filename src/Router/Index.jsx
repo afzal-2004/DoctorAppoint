@@ -12,13 +12,7 @@ import { DoctorDetails } from "../Components/DoctorDetails";
 import { MyProfile } from "../Components/UserProfile";
 import { MyAppointments } from "../Components/MyAppointments";
 /* ALL ADMIN PABEL REALTED ROITES IS DEFINED HERE*/
-import { AdminNavbar } from "../Admin/Components/Sidebar";
-import { AdminAuth } from "../Admin/Components/AdminAuth";
 
-import { AdminSidebar } from "../Admin/Components/Sidebar";
-import { AddDoctor } from "../Admin/Components/AddDoctor";
-import { DoctorList } from "../Admin/Components/DoctorList";
-import { AdminHome } from "../Admin/Components/AdminHome";
 export const Index = () => {
   return (
     <>
@@ -38,13 +32,6 @@ export const Index = () => {
             <Route path="/allDoctors" element={<DoctorOutlet />}>
               <Route path="/allDoctors" element={<Doctors />} />
             </Route>
-          </Route>
-          {/* / ADMIN PANEL ROUTES   */}
-          <Route path="/admin" element={<AdminAuth />} />
-          <Route path="/adminLayout" element={<AdminLayout />}>
-            <Route path="/adminLayout" element={<AdminHome />} />
-            <Route path="/adminLayout/adddoctor" element={<AddDoctor />} />
-            <Route path="/adminLayout/allDoctorList" element={<DoctorList />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -68,23 +55,5 @@ const DoctorOutlet = () => {
 
       <Outlet />
     </div>
-  );
-};
-
-export const AdminLayout = () => {
-  return (
-    <>
-      <AdminNavbar />
-      <div className="   border-black sm:border border-r-0 border-l-0 border-b-0 border-t-2  flex flex-col xl:flex-row ">
-        <AdminSidebar />
-        <div
-          className="bg-slate-100  m-auto mt-4 xl:mt-0  p-4 w-[100%]   
-        sm:max-w-[70%] md:max-w-[70%]  absolute   sm:left-[25%] md:min-w-[20%]    
-   "
-        >
-          <Outlet />
-        </div>
-      </div>
-    </>
   );
 };

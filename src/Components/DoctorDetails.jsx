@@ -8,7 +8,7 @@ import { DoctorCard } from "./DoctorCard";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
-import { Backend_Url } from "../../public/contstant";
+
 export const DoctorDetails = () => {
   const [Doctor, setDoctor] = useState([]);
   const {
@@ -26,11 +26,11 @@ export const DoctorDetails = () => {
   console.log("This is The the id if seected Doctor ", id);
 
   useEffect(() => {
-    axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
+    axios.get(`/Doctor.json`).then((res) => {
       const Doctordata = res.data;
       const DoctorDetail = Doctordata?.find((doc) => doc._id === id);
       setDoctor(DoctorDetail);
-      console.log("I want to the details of this doctor ", DoctorDetail);
+
       const Specility = DoctorDetail.speciality;
       const filterd = Doctordata.filter(
         (item) =>
@@ -49,7 +49,7 @@ export const DoctorDetails = () => {
         <main className="md:flex gap-10  p-4  ">
           <div className=" ">
             <img
-              src={`${Doctor?.avtar}`}
+              src={`${Doctor.image}`}
               alt="Doctorimage"
               className="w-full    object-cover  bg-blue-500 sm:min-w-[300px]   rounded-xl p-0  "
             />
@@ -96,7 +96,7 @@ export const DoctorDetails = () => {
                 </span>
               </div>
               <div className=" flex  flex-wrap gap-4  cursor-pointer">
-                {Doctor?.appointmentTime?.map((time, i) => (
+                {Doctor.apointmentTime?.map((time, i) => (
                   <div
                     className={`border border-gray-400 py-2   px-3 rounded-2xl sm:min-w-[150px] min-w-[100px] text-center ${
                       Time === i && "bg-blue-500 text-white"
@@ -122,9 +122,7 @@ export const DoctorDetails = () => {
                   <button
                     disabled={!token || !Date}
                     className={`m-[5vh] border ${
-                      !token || !Date
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-500"
+                      !Date ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
                     } rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center`}
                   >
                     Book an appointment

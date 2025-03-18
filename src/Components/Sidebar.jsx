@@ -3,6 +3,7 @@ import { AppContext } from "../Context/AppContext";
 
 export const Sidebar = () => {
   const { Doctorcategory, setDoctorcategory } = useContext(AppContext);
+  console.log("This is My doctor  ", Doctorcategory);
 
   return (
     <>
@@ -22,13 +23,14 @@ export const Sidebar = () => {
           </li>
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "Cardiologist" && "bg-blue-500 text-slate-100"
+              Doctorcategory === "General physician" &&
+              "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("Cardiologist");
+              setDoctorcategory("General physician");
             }}
           >
-            Cardiologist
+            General physician
           </li>
           <li
             className={`p-2 text-center border border-black  ${
@@ -52,10 +54,10 @@ export const Sidebar = () => {
           </li>
           <li
             className={`p-2 text-center border border-black  ${
-              Doctorcategory === "Pediatrician" && "bg-blue-500 text-slate-100"
+              Doctorcategory === "Pediatricians" && "bg-blue-500 text-slate-100"
             }`}
             onClick={() => {
-              setDoctorcategory("Pediatrician");
+              setDoctorcategory("Pediatricians");
             }}
           >
             Pediatrician
@@ -69,16 +71,6 @@ export const Sidebar = () => {
             }}
           >
             Neurologist
-          </li>
-          <li
-            className={`p-2 text-center border border-black  ${
-              Doctorcategory === "Surgeon" && "bg-blue-500 text-slate-100"
-            }`}
-            onClick={() => {
-              setDoctorcategory("Surgeon");
-            }}
-          >
-            Surgeon
           </li>
         </ul>
       </div>

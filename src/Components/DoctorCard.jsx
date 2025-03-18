@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import { toast } from "react-toastify";
-export const DoctorCard = ({ data, cancel, Doctorid }) => {
+export const DoctorCard = ({ data, cancel }) => {
   return (
     <div className="relative">
       {cancel && (
