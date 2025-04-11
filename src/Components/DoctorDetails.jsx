@@ -19,10 +19,12 @@ export const DoctorDetails = () => {
     Date,
     setDate,
     login,
+    Appointmentid,
+    setAppointmentid,
   } = useContext(AppContext);
 
   const { id } = useParams();
-  // console.log("This is The the id if seected Doctor ", id);
+
   console.log("The value of login is ", login);
 
   useEffect(() => {
@@ -42,6 +44,10 @@ export const DoctorDetails = () => {
       setDoctor(DoctorDetail);
     });
   }, [id]);
+
+  const addDoctorAppointment = (id) => {
+    setAppointmentid([...Appointmentid, id]);
+  };
 
   return (
     <>
@@ -132,7 +138,7 @@ export const DoctorDetails = () => {
                   <Link to={"/Appointments"}>
                     <button
                       className="m-[5vh] border bg-blue-500 rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center"
-                      // onClick={() => addDoctorAppointment(id)}
+                      onClick={() => addDoctorAppointment(id)}
                     >
                       Book an appointment
                       <FaArrowRight />

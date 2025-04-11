@@ -10,72 +10,46 @@ export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
   // eslint-disable-next-line no-unused-vars
 
-  const { Time, Date, token, setTime, setDate } = useContext(AppContext);
-
-  const [Appointedid, setAppointedid] = useState([]);
-  // console.log("This is My Appointed Doctors id ", Appointedid?.[0]?.Doctor);
+  const { Time, Date, token, setTime, setDate, Appointmentid } =
+    useContext(AppContext);
+  const [AppointedDoc, setAppointedDoc] = useState([]);
   const [Currentid, setCurrentid] = useState([]);
 
-  const [AppointedDoc, setAppointedDoc] = useState([]);
-
-  const AccesAppointedDoctor = () => {
-    axios
-      .get(`${Backend_Url}/AccessAppointedDoctor`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((e) => {
-        if (e.data) {
-          // console.log(e.data);
-          setAppointedid(e.data);
-          setTime(e.data.appointedTime);
-          setDate(e.data.Date);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const getAppointedDoctorlist = () => {
-    for (let i = 0; i < Appointedid.length; i++) {
-      axios.get(`${Backend_Url}/getDoctorlist`).then((res) => {
-        const Doctordata = res.data;
-        // const Doctors = Doctordata?.filter((doc) =>
-        //   Appointedid?.[0]?.Doctor.includes(doc._id)
-        // );
-        const Doctors = Doctordata?.filter((doc) =>
-          Appointedid.some((appointment) =>
-            appointment?.Doctor.includes(doc._id)
-          )
-        );
-        setAppointedDoc(Doctors);
-        // AppointedDoc.push(Doctors);
-      });
-    }
-  };
-
   useEffect(() => {
-    AccesAppointedDoctor();
-    getAppointedDoctorlist();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Appointedid, Currentid, Cancel]);
+    axios.get("/Doctor.json").then((e) => {
+      // console.log(e.data);
+      const AllDoc = e.data;
+      const myTemp = [];
+      for (let i = 0; i < Appointmentid.length; i++) {
+        const AppointDoc = AllDoc.find(
+          (Data) => Data._id.toUpperCase() === Appointmentid[i].toUpperCase()
+        );
+        // console.log(AppointDoc);
+        if (AppointDoc) {
+          myTemp.push(AppointDoc);
+        }
+        setAppointedDoc(myTemp);
+      }
+    });
+  }, [Appointmentid]);
+  console.log("This is My total Appointed Doctor", AppointedDoc);
 
   return (
     <>
       <div className={` mt-[8vh]  ${Cancel && " relative "}`}>
-        {/* {AppointedDoc.length === 0 ? (
+        {Appointmentid.length === 0 ? (
           <h1 className=" text-[25px] font-bold text-center">
             No Doctor Appointed{" "}
           </h1>
         ) : (
-          
-        )} */}
+          <></>
+        )}
         <>
           {AppointedDoc.map((doctor, i) => (
             <div key={i} className="   sm:flex">
               <div className="  mt-[3vh] sm:m-[3vh]  sm:flex  gap-3 border   w-full  border-slate-400 p-2 rounded-md">
                 <img
-                  src={`${doctor.avtar}`}
+                  src={`${doctor.image}`}
                   alt="Doctorimage"
                   className="   object-cover  bg-blue-500 sm:max-w-[200px]   rounded-xl p-0  "
                 />
@@ -97,7 +71,7 @@ export const MyAppointments = () => {
                     <p>Date & Time</p>
                     <span>{Date}</span>
 
-                    <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span>
+                    {/* <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span> */}
 
                     <p>Fees:</p>
                     <span>{doctor.doctorFees}rs</span>

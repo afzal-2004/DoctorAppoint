@@ -13,7 +13,9 @@ export const ContextProvider = ({ children }) => {
   const [Doctorcategory, setDoctorcategory] = useState("All");
   const [Profile, setProfile] = useState([]);
   const [Doctordata, setDoctordata] = useState([]);
-  const [login, setlogin] = useState(false);
+  const [login, setlogin] = useState(true);
+  const [Appointmentid, setAppointmentid] = useState(["doc1", "doc2"]);
+  console.log("This is My Appointedid", Appointmentid);
   useEffect(() => {
     axios.get(`/Doctor.json`).then((e) => {
       setDoctordata(e.data);
@@ -37,6 +39,8 @@ export const ContextProvider = ({ children }) => {
     setDoctordata,
     login,
     setlogin,
+    Appointmentid,
+    setAppointmentid,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
