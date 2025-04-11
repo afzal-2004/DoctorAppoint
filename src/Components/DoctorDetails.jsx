@@ -8,6 +8,7 @@ import { DoctorCard } from "./DoctorCard";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 export const DoctorDetails = () => {
   const [Doctor, setDoctor] = useState([]);
@@ -25,8 +26,7 @@ export const DoctorDetails = () => {
 
   const { id } = useParams();
 
-  console.log("The value of login is ", login);
-
+  console.log(login, Date);
   useEffect(() => {
     axios.get(`/Doctor.json`).then((res) => {
       const Doctordata = res.data;
@@ -47,6 +47,7 @@ export const DoctorDetails = () => {
 
   const addDoctorAppointment = (id) => {
     setAppointmentid([...Appointmentid, id]);
+    toast.success("Appointed Metting ");
   };
 
   return (
@@ -79,7 +80,7 @@ export const DoctorDetails = () => {
                 {Doctor?.about}
               </p>
               <p className="font-semibold flex gap-2">
-                Doctor Fees :<span>{Doctor?.doctorFees}rs</span>
+                Doctor Fees :<span>{Doctor?.fees}₹</span>
               </p>
             </div>
 
@@ -124,9 +125,9 @@ export const DoctorDetails = () => {
                 ))}
               </div>
               <div>
-                {!login && !Date ? (
+                {!login || !Date ? (
                   <button
-                    disabled={!login || !Date}
+                    disabled
                     className={`m-[5vh] border ${
                       !Date ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
                     } rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center`}
@@ -137,7 +138,7 @@ export const DoctorDetails = () => {
                 ) : (
                   <Link to={"/Appointments"}>
                     <button
-                      className="m-[5vh] border bg-blue-500 rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center"
+                      className="m-[5vh] border  rounded-3xl text-white p-4 sm:text-[18px] text-[15px] gap-3 flex items-center bg-blue-500 "
                       onClick={() => addDoctorAppointment(id)}
                     >
                       Book an appointment

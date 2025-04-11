@@ -3,28 +3,26 @@
 import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Backend_Url } from "../../public/contstant";
 import { toast } from "react-toastify";
 import { useRef } from "react";
+
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
-  // eslint-disable-next-line no-unused-vars
+  const { Time, Date, token, Appointmentid } = useContext(AppContext);
 
-  const { Time, Date, token, setTime, setDate, Appointmentid } =
-    useContext(AppContext);
   const [AppointedDoc, setAppointedDoc] = useState([]);
   const [Currentid, setCurrentid] = useState([]);
+  // console.log("This is Current Items id ", Currentid);
 
   useEffect(() => {
     axios.get("/Doctor.json").then((e) => {
-      // console.log(e.data);
       const AllDoc = e.data;
       const myTemp = [];
       for (let i = 0; i < Appointmentid.length; i++) {
         const AppointDoc = AllDoc.find(
           (Data) => Data._id.toUpperCase() === Appointmentid[i].toUpperCase()
         );
-        // console.log(AppointDoc);
+
         if (AppointDoc) {
           myTemp.push(AppointDoc);
         }
@@ -32,7 +30,6 @@ export const MyAppointments = () => {
       }
     });
   }, [Appointmentid]);
-  console.log("This is My total Appointed Doctor", AppointedDoc);
 
   return (
     <>
@@ -71,10 +68,10 @@ export const MyAppointments = () => {
                     <p>Date & Time</p>
                     <span>{Date}</span>
 
-                    {/* <span className="ml-2">{`${doctor.appointmentTime[Time]}`}</span> */}
+                    <span className="ml-2">{`${doctor.apointmentTime[Time]}`}</span>
 
                     <p>Fees:</p>
-                    <span>{doctor.doctorFees}rs</span>
+                    <span>{doctor.fees}₹</span>
                   </div>
                   <div className="  mt-[5vh] sm:mt-0 flex   sm:flex-col items-center  justify-center sm:justify-end gap-5">
                     <button
@@ -101,36 +98,37 @@ export const MyAppointments = () => {
         <CancelPopup
           setCancel={setCancel}
           Cancel={Cancel}
-          Appointedid={Currentid}
+          Currentid={Currentid}
           token={token}
-          setAppointedid={setCurrentid}
-          setAppointedDoc={setAppointedDoc}
         />
       )}
     </>
   );
 };
 
-const CancelPopup = ({ setCancel, Appointedid, token, setAppointedid }) => {
-  const deleteteAppointedDoctor = (id) => {
-    axios
-      .delete(`${Backend_Url}/DeletedAppointedDoctor/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((e) => {
-        console.log(e);
-        setCancel(false);
-        setAppointedid([]);
-        if (e.status === 201) {
-          toast.success(`${e.data.message}`, {
-            autoClose: 2000,
-          });
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+const CancelPopup = ({ setCancel, Currentid }) => {
+  const { Appointmentid, setAppointmentid } = useContext(AppContext);
+  // console.log(
+  //   "This is My Appointed Docter & Current Selected  id ",
+  //   Appointmentid,
+  //   Currentid
+  // );
+
+  const deleteteAppointedDoctor = () => {
+    const idsAfterDeletion = Appointmentid.filter(
+      (data) => data.toUpperCase() !== Currentid.toUpperCase()
+    );
+
+    console.log("These is the inside my db ", idsAfterDeletion);
+    setAppointmentid(idsAfterDeletion);
+    toast.success("Appointment Cancel ", {
+      autoClose: 2000,
+    });
   };
+
+  useEffect(() => {
+    // MyAppointments();
+  }, [Appointmentid]);
 
   return (
     <>
@@ -140,7 +138,8 @@ const CancelPopup = ({ setCancel, Appointedid, token, setAppointedid }) => {
           <button
             className=" bg-red-400 px-3 py-1 rounded-md m-4"
             onClick={() => {
-              deleteteAppointedDoctor(Appointedid);
+              deleteteAppointedDoctor(Currentid);
+              setCancel(false);
             }}
           >
             Yes

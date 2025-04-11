@@ -9,13 +9,24 @@ export const ContextProvider = ({ children }) => {
   const [Opennav, setOpenNav] = useState(false);
   const [RelatedDoctor, setRelatedDoctor] = useState([]);
   const [Time, setTime] = useState(0);
-  const [Date, setDate] = useState("");
+  const [Date, setDate] = useState(null);
   const [Doctorcategory, setDoctorcategory] = useState("All");
-  const [Profile, setProfile] = useState([]);
   const [Doctordata, setDoctordata] = useState([]);
-  const [login, setlogin] = useState(true);
-  const [Appointmentid, setAppointmentid] = useState(["doc1", "doc2"]);
-  console.log("This is My Appointedid", Appointmentid);
+  // console.log("These Are All Doctor Present inside the Web", Doctordata);
+  const [login, setlogin] = useState(false);
+  const [Appointmentid, setAppointmentid] = useState(["doc1"]);
+  // console.log("These All Id of My Appointed Doctors", Appointmentid);
+  const [Registerdata, setRegisterdata] = useState({
+    name: "Afzal",
+    email: "moa44468@gmail.com",
+    Mobilenumer: "1234567890",
+    Password: "1234",
+    // name: "",
+    // email: "",
+    // Mobilenumer: "",
+    // Password: "",
+  });
+
   useEffect(() => {
     axios.get(`/Doctor.json`).then((e) => {
       setDoctordata(e.data);
@@ -31,8 +42,6 @@ export const ContextProvider = ({ children }) => {
     setTime,
     Date,
     setDate,
-    Profile,
-    setProfile,
     Doctorcategory,
     setDoctorcategory,
     Doctordata,
@@ -41,6 +50,8 @@ export const ContextProvider = ({ children }) => {
     setlogin,
     Appointmentid,
     setAppointmentid,
+    Registerdata,
+    setRegisterdata,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

@@ -8,23 +8,22 @@ import { AppContext } from "../Context/AppContext";
 import { FaChevronLeft } from "react-icons/fa";
 import "./Components.css";
 
-// import { toast } from "react-toastify";
-
 export const UserProfile = () => {
-  const { Profile, setOpenNav, setlogin } = useContext(AppContext);
+  const { Registerdata, setOpenNav, setlogin } = useContext(AppContext);
+
   const [OpenProfilenav, setOpenProfilenav] = useState(false);
   const handelProfileNav = (OpenProfilenav) => {
     setOpenProfilenav(!OpenProfilenav);
   };
   return (
     <>
-      {setlogin && (
+      {setlogin && Registerdata ? (
         <div className=" sm:flex items-center gap-1 hidden ">
-          {Profile.profilePicture ? (
+          {Registerdata.profilePicture ? (
             <img src={Profile_pic} alt="" className="w-[50px] rounded-full" />
           ) : (
             <p className="w-[50px]  h-[50px] rounded-full bg-yellow-400 text-black  sm:flex  justify-center items-center text-[20px]  ">
-              {Profile.name?.[0]}
+              {Registerdata.name?.[0]}
             </p>
           )}
           <IoIosArrowDown
@@ -34,6 +33,8 @@ export const UserProfile = () => {
             }}
           />
         </div>
+      ) : (
+        ""
       )}
 
       <div
@@ -98,7 +99,7 @@ const ProfileSidebar = ({ handelProfileNav }) => {
 };
 
 export const MyProfile = () => {
-  const { Profile } = useContext(AppContext);
+  const { Registerdata: Profile } = useContext(AppContext);
   const Profiledata = [
     {
       title: "Name",

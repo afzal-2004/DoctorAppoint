@@ -7,14 +7,8 @@ import "./Components.css";
 
 export const Register = () => {
   const navigate = useNavigate();
-  const { setProfile } = useContext(AppContext);
+  const { setRegisterdata, Registerdata } = useContext(AppContext);
 
-  const [Registerdata, setRegisterdata] = useState({
-    name: "Afzal",
-    email: "moa44468@gmail.com",
-    Mobilenumer: "1234567890",
-    Password: "1234",
-  });
   const handelChange = (e) => {
     setRegisterdata({
       ...Registerdata,
@@ -24,11 +18,11 @@ export const Register = () => {
 
   const handleData = (e) => {
     e.preventDefault();
-    toast.success("Register Sucessfully");
-    setProfile(Registerdata);
+    toast.success("Register Sucessfully", { autoClose: 1500 });
+
     setTimeout(() => {
       navigate("/login");
-    }, 1000);
+    }, 1500);
   };
 
   return (
@@ -116,6 +110,8 @@ export const Login = () => {
   const [data, setdata] = useState({
     emailOrMobile: "moa4468@gmail.com",
     Password: "1234",
+    // emailOrMobile: "",
+    // Password: "",
   });
   const handleChange = (e) => {
     e.preventDefault();
@@ -126,12 +122,14 @@ export const Login = () => {
   };
   const handleData = (e) => {
     e.preventDefault();
-
     handleChange;
+    toast.success("login Sucessfully", {
+      autoClose: 1500,
+    });
 
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 1500);
   };
 
   return (
