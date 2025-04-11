@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { AppContext } from "../Context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const MyAppointments = () => {
   const [Cancel, setCancel] = useState(false);
-  const { Time, Date, token, Appointmentid } = useContext(AppContext);
+  const { Time, Date, Appointmentid } = useContext(AppContext);
 
   const [AppointedDoc, setAppointedDoc] = useState([]);
   const [Currentid, setCurrentid] = useState([]);
@@ -94,19 +95,14 @@ export const MyAppointments = () => {
         </>
       </div>
 
-      {Cancel && (
-        <CancelPopup
-          setCancel={setCancel}
-          Cancel={Cancel}
-          Currentid={Currentid}
-          token={token}
-        />
-      )}
+      {Cancel && <CancelPopup setCancel={setCancel} Currentid={Currentid} />}
     </>
   );
 };
 
 const CancelPopup = ({ setCancel, Currentid }) => {
+  const navigate = useNavigate();
+
   const { Appointmentid, setAppointmentid } = useContext(AppContext);
   // console.log(
   //   "This is My Appointed Docter & Current Selected  id ",
@@ -119,16 +115,14 @@ const CancelPopup = ({ setCancel, Currentid }) => {
       (data) => data.toUpperCase() !== Currentid.toUpperCase()
     );
 
-    console.log("These is the inside my db ", idsAfterDeletion);
+    // console.log("These is the inside my db ", idsAfterDeletion);
     setAppointmentid(idsAfterDeletion);
     toast.success("Appointment Cancel ", {
       autoClose: 2000,
     });
-  };
 
-  useEffect(() => {
-    // MyAppointments();
-  }, [Appointmentid]);
+    navigate("/");
+  };
 
   return (
     <>

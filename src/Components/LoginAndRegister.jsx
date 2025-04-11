@@ -108,10 +108,10 @@ export const Login = () => {
   const { setlogin } = useContext(AppContext);
 
   const [data, setdata] = useState({
-    emailOrMobile: "moa4468@gmail.com",
-    Password: "1234",
-    // emailOrMobile: "",
-    // Password: "",
+    // emailOrMobile: "moa4468@gmail.com",
+    // Password: "1234",
+    emailOrMobile: "",
+    Password: "",
   });
   const handleChange = (e) => {
     e.preventDefault();

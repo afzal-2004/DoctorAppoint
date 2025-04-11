@@ -14,17 +14,17 @@ export const ContextProvider = ({ children }) => {
   const [Doctordata, setDoctordata] = useState([]);
   // console.log("These Are All Doctor Present inside the Web", Doctordata);
   const [login, setlogin] = useState(false);
-  const [Appointmentid, setAppointmentid] = useState(["doc1"]);
+  const [Appointmentid, setAppointmentid] = useState([]);
   // console.log("These All Id of My Appointed Doctors", Appointmentid);
   const [Registerdata, setRegisterdata] = useState({
-    name: "Afzal",
-    email: "moa44468@gmail.com",
-    Mobilenumer: "1234567890",
-    Password: "1234",
-    // name: "",
-    // email: "",
-    // Mobilenumer: "",
-    // Password: "",
+    // name: "Afzal",
+    // email: "moa44468@gmail.com",
+    // Mobilenumer: "1234567890",
+    // Password: "1234",
+    name: "",
+    email: "",
+    Mobilenumer: "",
+    Password: "",
   });
 
   useEffect(() => {
