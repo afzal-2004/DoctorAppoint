@@ -67,7 +67,7 @@ export const Register = () => {
           </label>
           <input
             type="text"
-            name="Mobilenumner"
+            name="Mobilenumer"
             value={Registerdata.Mobilenumer}
             onChange={handelChange}
             className="loginForminput"
